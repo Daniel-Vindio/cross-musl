@@ -99,6 +99,20 @@ registro_error $MSG_INST
 ln -fv /tools/lib/libc.so /tools/lib/ld-musl-${CLFS_ARCH_m}.so.1
 registro_error $MSG_INST "ln -fv /tools/lib/libc.so ---"
 
+mkdir -p /tools/etc
+registro_error "mkdir -p /tools/etc"
+
+cat > /tools/etc/ld-musl-${CLFS_ARCH_m}.path << "EOF"
+# ld-musl-${CLFS_ARCH_m}.path
+
+/tools/lib
+/tools/lib64
+
+#/tools/lib:/tools/lib64:/lib:/usr/local/lib:/usr/lib
+# End ld-musl-${CLFS_ARCH_m}.path
+EOF
+registro_error "cat > /tools/etc/ld-musl..."
+
 
 ######------------------------------------------------------------------
 
