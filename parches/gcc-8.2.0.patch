@@ -1,0 +1,118 @@
+diff -Naur gcc-8.2.0/gcc/config/linux.h gcc-8.2.0.modif/gcc/config/linux.h
+--- gcc-8.2.0/gcc/config/linux.h	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0.modif/gcc/config/linux.h	2018-11-19 20:02:17.476016437 +0100
+@@ -90,10 +90,10 @@
+ #define BIONIC_DYNAMIC_LINKER64 "/system/bin/linker64"
+ #define BIONIC_DYNAMIC_LINKERX32 "/system/bin/linkerx32"
+ /* Should be redefined for each target that supports musl.  */
+-#define MUSL_DYNAMIC_LINKER "/dev/null"
+-#define MUSL_DYNAMIC_LINKER32 "/dev/null"
+-#define MUSL_DYNAMIC_LINKER64 "/dev/null"
+-#define MUSL_DYNAMIC_LINKERX32 "/dev/null"
++#define MUSL_DYNAMIC_LINKER "/lib/ld-musl-x86_64.so.1"
++#define MUSL_DYNAMIC_LINKER32 "/lib/ld-musl-i386.so.1"
++#define MUSL_DYNAMIC_LINKER64 "/lib/ld-musl-x86_64.so.1"
++#define MUSL_DYNAMIC_LINKERX32 "/lib/ld-musl-i386.so.1"
+ 
+ #define GNU_USER_DYNAMIC_LINKER						\
+   CHOOSE_DYNAMIC_LINKER (GLIBC_DYNAMIC_LINKER, UCLIBC_DYNAMIC_LINKER,	\
+
+diff -Naur gcc-8.2.0/libgcc/gthr.h gcc-8.2.0.modif/libgcc/gthr.h
+--- gcc-8.2.0/libgcc/gthr.h	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0.modif/libgcc/gthr.h	2018-11-18 21:47:23.458097960 +0100
+@@ -136,10 +136,10 @@
+ /* The pe-coff weak support isn't fully compatible to ELF's weak.
+    For static libraries it might would work, but as we need to deal
+    with shared versions too, we disable it for mingw-targets.  */
+-#ifdef __MINGW32__
++
+ #undef GTHREAD_USE_WEAK
+ #define GTHREAD_USE_WEAK 0
+-#endif
++
+ 
+ #ifndef GTHREAD_USE_WEAK
+ #define GTHREAD_USE_WEAK 1
+diff -Naur gcc-8.2.0/libgomp/config/posix/time.c gcc-8.2.0.modif/libgomp/config/posix/time.c
+--- gcc-8.2.0/libgomp/config/posix/time.c	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0.modif/libgomp/config/posix/time.c	2018-11-18 21:18:51.920016206 +0100
+@@ -29,6 +29,8 @@
+    The following implementation uses the most simple POSIX routines.
+    If present, POSIX 4 clocks should be used instead.  */
+ 
++#define _POSIX_C_SOURCE 199309L /* for clocks */
++
+ #include "libgomp.h"
+ #include <unistd.h>
+ #if TIME_WITH_SYS_TIME
+diff -Naur gcc-8.2.0/libitm/config/arm/hwcap.cc gcc-8.2.0.modif/libitm/config/arm/hwcap.cc
+--- gcc-8.2.0/libitm/config/arm/hwcap.cc	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0.modif/libitm/config/arm/hwcap.cc	2018-11-19 19:48:49.972029073 +0100
+@@ -39,7 +39,11 @@
+   ;
+ 
+ #ifdef __linux__
+-#include <unistd.h>
++#ifdef __GLIBC__
++#include <sys/fcntl.h>
++#else
++#include <fcntl.h>
++#endif
+ #include <fcntl.h>
+ #include <elf.h>
+ 
+diff -Naur gcc-8.2.0/libstdc++-v3/configure.host gcc-8.2.0.modif/libstdc++-v3/configure.host
+--- gcc-8.2.0/libstdc++-v3/configure.host	2017-02-02 17:24:03.000000000 +0100
++++ gcc-8.2.0.modif/libstdc++-v3/configure.host	2018-11-18 21:06:18.883010449 +0100
+@@ -258,7 +258,7 @@
+   freebsd*)
+     os_include_dir="os/bsd/freebsd"
+     ;;
+-  linux-musl*)
++  *-musl*)
+     os_include_dir="os/generic"
+     ;;
+   gnu* | linux* | kfreebsd*-gnu)
+diff -Naur gcc-8.2.0.orig/gcc/glimits.h gcc-8.2.0/gcc/glimits.h
+--- gcc-8.2.0.orig/gcc/glimits.h	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0/gcc/glimits.h	2018-11-24 09:30:37.025148945 +0100
+@@ -24,6 +24,10 @@
+ #ifndef _LIMITS_H___
+ #define _LIMITS_H___
+ 
++#ifndef PATH_MAX
++#define PATH_MAX        4096	/* # chars in a path name including nul */
++#endif
++
+ /* Number of bits in a `char'.  */
+ #undef CHAR_BIT
+ #define CHAR_BIT __CHAR_BIT__
+diff -Naur gcc-8.2.0.orig/libstdc++-v3/config/os/gnu-linux/os_defines.h gcc-8.2.0/libstdc++-v3/config/os/gnu-linux/os_defines.h
+--- gcc-8.2.0.orig/libstdc++-v3/config/os/gnu-linux/os_defines.h	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0/libstdc++-v3/config/os/gnu-linux/os_defines.h	2018-11-24 09:32:24.225189378 +0100
+@@ -30,6 +30,10 @@
+ #ifndef _GLIBCXX_OS_DEFINES
+ #define _GLIBCXX_OS_DEFINES 1
+ 
++#ifndef __GLIBC_PREREQ
++#define __GLIBC_PREREQ
++#endif
++
+ // System-specific #define, typedefs, corrections, etc, go here.  This
+ // file will come before all others.
+ 
+ 
+
+diff -Naur gcc-8.2.0.orig/libstdc++-v3/config/os/generic/os_defines.h gcc-8.2.0/libstdc++-v3/config/os/generic/os_defines.h
+--- gcc-8.2.0.orig/libstdc++-v3/config/os/generic/os_defines.h	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0/libstdc++-v3/config/os/generic/os_defines.h	2018-11-25 16:37:08.202780927 +0100
+@@ -30,6 +30,10 @@
+ #ifndef _GLIBCXX_OS_DEFINES
+ #define _GLIBCXX_OS_DEFINES 1
+ 
++#ifndef __GLIBC_PREREQ
++#define __GLIBC_PREREQ
++#endif
++
+ // System-specific #define, typedefs, corrections, etc, go here.  This
+ // file will come before all others.

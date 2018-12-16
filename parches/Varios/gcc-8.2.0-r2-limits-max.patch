@@ -1,0 +1,41 @@
+diff -Naur gcc-8.2.0.orig/gcc/glimits.h gcc-8.2.0/gcc/glimits.h
+--- gcc-8.2.0.orig/gcc/glimits.h	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0/gcc/glimits.h	2018-11-24 09:30:37.025148945 +0100
+@@ -24,6 +24,10 @@
+ #ifndef _LIMITS_H___
+ #define _LIMITS_H___
+ 
++#ifndef PATH_MAX
++#define PATH_MAX        4096	/* # chars in a path name including nul */
++#endif
++
+ /* Number of bits in a `char'.  */
+ #undef CHAR_BIT
+ #define CHAR_BIT __CHAR_BIT__
+diff -Naur gcc-8.2.0.orig/libstdc++-v3/config/os/gnu-linux/os_defines.h gcc-8.2.0/libstdc++-v3/config/os/gnu-linux/os_defines.h
+--- gcc-8.2.0.orig/libstdc++-v3/config/os/gnu-linux/os_defines.h	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0/libstdc++-v3/config/os/gnu-linux/os_defines.h	2018-11-24 09:32:24.225189378 +0100
+@@ -30,6 +30,10 @@
+ #ifndef _GLIBCXX_OS_DEFINES
+ #define _GLIBCXX_OS_DEFINES 1
+ 
++#ifndef __GLIBC_PREREQ
++#define __GLIBC_PREREQ
++#endif
++
+ // System-specific #define, typedefs, corrections, etc, go here.  This
+ // file will come before all others.
+ 
+diff -Naur gcc-8.2.0.orig/libstdc++-v3/config/os/generic/os_defines.h gcc-8.2.0/libstdc++-v3/config/os/generic/os_defines.h
+--- gcc-8.2.0.orig/libstdc++-v3/config/os/generic/os_defines.h	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0/libstdc++-v3/config/os/generic/os_defines.h	2018-11-25 16:37:08.202780927 +0100
+@@ -30,6 +30,10 @@
+ #ifndef _GLIBCXX_OS_DEFINES
+ #define _GLIBCXX_OS_DEFINES 1
+ 
++#ifndef __GLIBC_PREREQ
++#define __GLIBC_PREREQ
++#endif
++
+ // System-specific #define, typedefs, corrections, etc, go here.  This
+ // file will come before all others.

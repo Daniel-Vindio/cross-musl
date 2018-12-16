@@ -1,0 +1,22 @@
+diff -Naur binutils-2.31.1.orig/bfd/trad-core.c binutils-2.31.1/bfd/trad-core.c
+--- binutils-2.31.1.orig/bfd/trad-core.c	2018-06-24 20:38:57.000000000 +0200
++++ binutils-2.31.1/bfd/trad-core.c	2018-12-09 20:56:34.167332514 +0100
+@@ -23,6 +23,7 @@
+ #include "bfd.h"
+ #include "libbfd.h"
+ #include "libaout.h"	       /* BFD a.out internal data structures */
++#include <unistd.h>
+ 
+ #include <sys/param.h>
+ #ifdef HAVE_DIRENT_H
+@@ -46,6 +47,10 @@
+ #include TRAD_HEADER
+ #endif
+ 
++#ifndef PAGESIZE
++# define PAGESIZE getpagesize()
++#endif
++
+ #ifndef NBPG
+ # define NBPG getpagesize()
+ #endif

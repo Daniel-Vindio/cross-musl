@@ -1,0 +1,27 @@
+diff -Naur findutils-4.6.0.orig/lib/buildcmd.c findutils-4.6.0/lib/buildcmd.c
+--- findutils-4.6.0.orig/lib/buildcmd.c	2018-10-28 19:18:30.000000000 +0100
++++ findutils-4.6.0/lib/buildcmd.c	2018-11-26 22:50:04.470438288 +0100
+@@ -44,8 +44,9 @@
+    We try to make it as large as possible.  See bc_get_arg_max() below. */
+ #if defined NCARGS && !defined ARG_MAX
+ /* We include sys/param.h in order to detect this case. */
+-#error "You have an unusual system.  Once you remove this error message from buildcmd.c, it should work, but please make sure that DejaGnu is installed on your system and that 'make check' passes before using the findutils programs.  Please mail bug-findutils@gnu.org to tell us about your system."
++//#error "You have an unusual system.  Once you remove this error message from buildcmd.c, it should work, but please make sure that DejaGnu is installed on your system and that 'make check' passes before using the findutils programs.  Please mail bug-findutils@gnu.org to tell us about your system."
+ #define ARG_MAX NCARGS
++#define _POSIX_ARG_MAX 4096
+ #endif
+ 
+ 
+diff -Naur findutils-4.6.0.orig/lib/fdleak.c findutils-4.6.0/lib/fdleak.c
+--- findutils-4.6.0.orig/lib/fdleak.c	2018-10-28 19:18:30.000000000 +0100
++++ findutils-4.6.0/lib/fdleak.c	2018-11-26 22:51:10.998498260 +0100
+@@ -44,6 +44,9 @@
+ #include "fdleak.h"
+ #include "safe-atoi.h"
+ 
++#ifndef _POSIX_OPEN_MAX
++#define _POSIX_OPEN_MAX 20
++#endif
+ 
+ /* In order to detect FD leaks, we take a snapshot of the open
+  * file descriptors which are not FD_CLOEXEC when the program starts.

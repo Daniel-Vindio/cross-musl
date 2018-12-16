@@ -1,0 +1,125 @@
+diff -Naur gcc-8.2.0/gcc/config/linux.h gcc-8.2.0.modif/gcc/config/linux.h
+--- gcc-8.2.0/gcc/config/linux.h	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0.modif/gcc/config/linux.h	2018-11-19 20:02:17.476016437 +0100
+@@ -90,10 +90,10 @@
+ #define BIONIC_DYNAMIC_LINKER64 "/system/bin/linker64"
+ #define BIONIC_DYNAMIC_LINKERX32 "/system/bin/linkerx32"
+ /* Should be redefined for each target that supports musl.  */
+-#define MUSL_DYNAMIC_LINKER "/dev/null"
+-#define MUSL_DYNAMIC_LINKER32 "/dev/null"
+-#define MUSL_DYNAMIC_LINKER64 "/dev/null"
+-#define MUSL_DYNAMIC_LINKERX32 "/dev/null"
++#define MUSL_DYNAMIC_LINKER "/lib/ld-musl-x86_64.so.1"
++#define MUSL_DYNAMIC_LINKER32 "/lib/ld-musl-i386.so.1"
++#define MUSL_DYNAMIC_LINKER64 "/lib/ld-musl-x86_64.so.1"
++#define MUSL_DYNAMIC_LINKERX32 "/lib/ld-musl-i386.so.1"
+ 
+ #define GNU_USER_DYNAMIC_LINKER						\
+   CHOOSE_DYNAMIC_LINKER (GLIBC_DYNAMIC_LINKER, UCLIBC_DYNAMIC_LINKER,	\
+diff -Naur gcc-8.2.0/gcc/ginclude/stddef.h gcc-8.2.0.modif/gcc/ginclude/stddef.h
+--- gcc-8.2.0/gcc/ginclude/stddef.h	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0.modif/gcc/ginclude/stddef.h	2018-11-18 21:15:48.215724635 +0100
+@@ -1,4 +1,4 @@
+-/* Copyright (C) 1989-2018 Free Software Foundation, Inc.
++/* Copyright (C) 1989-2017 Free Software Foundation, Inc.
+ 
+ This file is part of GCC.
+ 
+@@ -184,6 +184,8 @@
+ #ifndef _GCC_SIZE_T
+ #ifndef _SIZET_
+ #ifndef __size_t
++#ifndef __DEFINED_size_t /* musl ======================*/
++#ifndef __WCHAR_TYPE__ /* musl ========================*/
+ #define __size_t__	/* BeOS */
+ #define __SIZE_T__	/* Cray Unicos/Mk */
+ #define _SIZE_T
+@@ -200,6 +202,8 @@
+ #define ___int_size_t_h
+ #define _GCC_SIZE_T
+ #define _SIZET_
++#define __DEFINED_size_t /* musl ========================*/
++#define __WCHAR_TYPE__ /* musl ==========================*/
+ #if (defined (__FreeBSD__) && (__FreeBSD__ >= 5)) \
+   || defined(__DragonFly__) \
+   || defined(__FreeBSD_kernel__)
+@@ -222,6 +226,8 @@
+ #endif /* _SIZET_ */
+ #endif /* _GCC_SIZE_T */
+ #endif /* ___int_size_t_h */
++#endif /* __DEFINED_size_t musl ===================== */
++#endif /* __WCHAR_TYPE__ musl ======================= */
+ #endif /* _SIZE_T_DECLARED */
+ #endif /* _BSD_SIZE_T_DEFINED_ */
+ #endif /* _SIZE_T_DEFINED */
+@@ -322,11 +328,11 @@
+ #endif
+ 
+ #ifndef __WCHAR_TYPE__
+-#define __WCHAR_TYPE__ int
++#define __WCHAR_TYPE__ wchar_t /* was __WCHAR_TYPE__ int =========== */
+ #endif
+-#ifndef __cplusplus
++/* #ifndef __cplusplus
+ typedef __WCHAR_TYPE__ wchar_t;
+-#endif
++#endif */
+ #endif
+ #endif
+ #endif
+diff -Naur gcc-8.2.0/libgcc/gthr.h gcc-8.2.0.modif/libgcc/gthr.h
+--- gcc-8.2.0/libgcc/gthr.h	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0.modif/libgcc/gthr.h	2018-11-18 21:47:23.458097960 +0100
+@@ -136,10 +136,10 @@
+ /* The pe-coff weak support isn't fully compatible to ELF's weak.
+    For static libraries it might would work, but as we need to deal
+    with shared versions too, we disable it for mingw-targets.  */
+-#ifdef __MINGW32__
++
+ #undef GTHREAD_USE_WEAK
+ #define GTHREAD_USE_WEAK 0
+-#endif
++
+ 
+ #ifndef GTHREAD_USE_WEAK
+ #define GTHREAD_USE_WEAK 1
+diff -Naur gcc-8.2.0/libgomp/config/posix/time.c gcc-8.2.0.modif/libgomp/config/posix/time.c
+--- gcc-8.2.0/libgomp/config/posix/time.c	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0.modif/libgomp/config/posix/time.c	2018-11-18 21:18:51.920016206 +0100
+@@ -29,6 +29,8 @@
+    The following implementation uses the most simple POSIX routines.
+    If present, POSIX 4 clocks should be used instead.  */
+ 
++#define _POSIX_C_SOURCE 199309L /* for clocks */
++
+ #include "libgomp.h"
+ #include <unistd.h>
+ #if TIME_WITH_SYS_TIME
+diff -Naur gcc-8.2.0/libitm/config/arm/hwcap.cc gcc-8.2.0.modif/libitm/config/arm/hwcap.cc
+--- gcc-8.2.0/libitm/config/arm/hwcap.cc	2018-01-03 11:03:58.000000000 +0100
++++ gcc-8.2.0.modif/libitm/config/arm/hwcap.cc	2018-11-19 19:48:49.972029073 +0100
+@@ -39,7 +39,11 @@
+   ;
+ 
+ #ifdef __linux__
+-#include <unistd.h>
++#ifdef __GLIBC__
++#include <sys/fcntl.h>
++#else
++#include <fcntl.h>
++#endif
+ #include <fcntl.h>
+ #include <elf.h>
+ 
+diff -Naur gcc-8.2.0/libstdc++-v3/configure.host gcc-8.2.0.modif/libstdc++-v3/configure.host
+--- gcc-8.2.0/libstdc++-v3/configure.host	2017-02-02 17:24:03.000000000 +0100
++++ gcc-8.2.0.modif/libstdc++-v3/configure.host	2018-11-18 21:06:18.883010449 +0100
+@@ -258,7 +258,7 @@
+   freebsd*)
+     os_include_dir="os/bsd/freebsd"
+     ;;
+-  linux-musl*)
++  *-musl*)
+     os_include_dir="os/generic"
+     ;;
+   gnu* | linux* | kfreebsd*-gnu)
