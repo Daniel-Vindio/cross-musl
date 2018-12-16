@@ -1,0 +1,78 @@
+#This set of variables is for CLFS -Embedded -musl --disable-multilib
+
+echo -e "
+############################################################\n\
+#  General variables---------------------------------------#\n\
+############################################################\n"
+
+set +h
+umask 022
+
+LC_ALL=POSIX
+export LC_ALL
+
+PATH=/cross-tools/bin:/bin:/usr/bin
+export PATH
+
+CLFS=/mnt/clfs_MUSL
+export CLFS
+
+ln -svf $CLFS/tools /
+ln -svf $CLFS/cross-tools /
+
+unset CFLAGS CXXFLAGS
+
+#=================Variables para los meta instaladores==================
+srcdir=$(pwd)
+
+srcinst1="$srcdir/1-inst-cross-tools-musl"
+srcinst2="$srcdir/2-inst-chroot"
+srcinst3="$srcdir/3-inst-clfs-system"
+dirversiones="$srcdir/versiones"
+chrootqipkgs="$CLFS/qipkgs"
+croothome="$CLFS/home"
+export srcdir srcinst1 srcinst2 srcinst3 dirversiones \
+	   chrootqipkgs croothome 
+
+#=================Variables para los instaladores=======================
+#--Variables para mensajes
+MSG_CONF="Configure"
+MSG_MAKE="Make"
+MSG_CHK="Check"
+MSG_INST="Make_install"
+MSG_ERR="Se ha producido un error"
+MSG_TIME="Tiempo de instalación"
+export MSG_CONF MSG_MAKE MSG_CHK MSG_INST MSG_ERR MSG_TIME
+
+#--Variables para los registros--------------------
+DIR_FUENTES="$CLFS/sources"
+FILE_BITACORA="$srcdir/registros/reg_instal.log"
+FILE_CHECKS="$srcdir/registros/test.log"
+export DIR_FUENTES FILE_BITACORA FILE_CHECKS
+
+#--Variables de compilación
+#solo como ejemplo cuando no es musl CLFS_HOST="x86_64-cross-linux-gnu"
+#clfs_arch sería la del target ¿? 30/11/18. Empiezo con un NATIVE B=H=T
+#Este funciona CLFS_ARCH="x86_64" Esta no la admite CLFS_ARCH_k="x86_32"
+###CLFS_CPU="x86_64" pensado para gcc. No funciona 
+#Pruebo 32 bit i686 no la reconoce el linux
+
+CLFS_ARCH_k="x86"
+#CLFS_ARCH_m="i386"
+CLFS_ARCH_m="x86_64"
+export CLFS_CPU CLFS_ARCH CLFS_ARCH_k CLFS_ARCH_m
+
+#Host=Build y funcionan con Glibc --> triplet gnu, no musl
+#Build = echo ${MACHTYPE} --> x86_64-pc-linux-gnu.  cambiar pc - cross
+#para que entienda que hay que cross.
+
+CLFS_HOST="x86_64-cross-linux-gnu"
+CLFS_TARGET="${CLFS_ARCH_m}-unknown-linux-musl"
+export CLFS_HOST CLFS_TARGET
+
+CLFS_ENDIAN="little"
+export CLFS_ENDIAN
+
+MAKEFLAGS='-j 4'
+export MAKEFLAGS
+
