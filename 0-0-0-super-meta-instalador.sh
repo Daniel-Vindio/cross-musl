@@ -36,9 +36,15 @@ fi
 # Version 3.0.0-SYSVINIT-x86_64-Multilib
 # III. Make the Cross-Compile Tools
 # 5. Constructing Cross-Compile Tools
+
+#If building on x86_64, this ensures the sanity of the toolchain
+#en pruebas
+case $(uname -m) in
+  x86_64) mkdir -pv /tools/lib && ln -sfv /tools/lib /tools/lib64 ;;
+esac
+
 cd $srcinst1
 ./1-1-meta-inst-cross-tools-musl.sh
-
 
 # IV. Building the Basic Tools
 # 6. Constructing a Temporary System
@@ -59,17 +65,23 @@ chmod -v 777 $croothome
 mkdir -v $chrootqipkgs
 chmod -v 777 $chrootqipkgs
 
-cp -v $srcdir/0-var-chroot-rc $croothome
+# 0-var-chroot-rc $croothome ojo a CLFS_TARGET32, recordar para qué vale.
+cp -v $srcdir/0-var-chroot-musl-rc $croothome
 cp -v $srcinst2/2-4-creacion-directorios.sh $croothome
 cp -v $srcinst2/2-5-creacion-config-files.sh $croothome
-cp -v $srcinst3/* $croothome
+
+#cp -v $srcinst3/* $croothome
 cp -v $dirversiones/versiones.sh $croothome
 
-touch $croothome/reg_instal.log
+touch $croothome/reg_instal-chroot.log
 touch $croothome/test.log
 
 #====== STAGE 2 ========================================================
-./2-3-1-empiece-chroot.sh
+#./2-3-1-empiece-chroot.sh
+#En esta fase de debugging mejor empezar con:
+./2-3-2-empiece-chroot.sh
+
+
 
 
 #Este tendrá que cargar un meta instaldor a la vez que el chroot
