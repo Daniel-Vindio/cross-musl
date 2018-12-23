@@ -70,25 +70,16 @@ cp -v $srcdir/0-var-chroot-musl-rc $croothome
 cp -v $srcinst2/2-4-creacion-directorios.sh $croothome
 cp -v $srcinst2/2-5-creacion-config-files.sh $croothome
 
-#cp -v $srcinst3/* $croothome
+cp -v $srcinst3/* $croothome
 cp -v $dirversiones/versiones.sh $croothome
 
 touch $croothome/reg_instal-chroot.log
 touch $croothome/test.log
 
 #====== STAGE 2 ========================================================
+#Para instalación automática
 #./2-3-1-empiece-chroot.sh
+
 #En esta fase de debugging mejor empezar con:
 ./2-3-2-empiece-chroot.sh
 
-
-
-
-#Este tendrá que cargar un meta instaldor a la vez que el chroot
-#Carga /home/0-super-meta-instalador-clfs-system.sh
-
-#/home*/0-super-meta-instalador-clfs-system.sh is a very important script.
-#See /home**/clfs/cross-compilador/2-inst-clfs-system
-
-#* Home of the chroot envirnment
-#** Home of the building system. 

@@ -42,21 +42,11 @@ export DIR_FUENTES FILE_BITACORA FILE_CHECKS
 ##--Variables de compilación
 ##Compiling for $CLFS_TARGET32 is cross-compiling in a multilib system
 ##So with musl, as it isn't multilib we dont need this labels
-
 #CLFS_TARGET32="i686-pc-linux-gnu"
 #export CLFS_TARGET32
 
-#BUILD32="-m32"
-#BUILD64="-m64"
-#export BUILD32 BUILD64
-
 MAKEFLAGS='-j 4'
 export MAKEFLAGS
-
-##Same reasons as with CLFS_TARGET32
-#PKG_CONFIG_PATH32="/usr/lib/pkgconfig"
-#PKG_CONFIG_PATH64="/usr/lib64/pkgconfig"
-#export PKG_CONFIG_PATH32 PKG_CONFIG_PATH64
 
 PKG_CONFIG_PATH="/usr/lib/pkgconfig"
 export PKG_CONFIG_PATH
