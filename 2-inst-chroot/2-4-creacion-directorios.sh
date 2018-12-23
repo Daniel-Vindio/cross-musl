@@ -59,7 +59,8 @@ ln -sv /run/lock /var/lock
 #-----8.6. Creating Essential Files and Symlinks 
 #-----6.6. Creating Essential Files and Symlinks 
 
-ln -sv /tools/bin/{bash,cat,dd,echo,file,ln,pwd,rm,stty} /bin
+#Quito file (en /tools no va bien...)
+ln -sv /tools/bin/{bash,cat,dd,echo,ln,pwd,rm,stty} /bin
 ln -sv /tools/bin/{env,install} /usr/bin
 #control_flujo
 
