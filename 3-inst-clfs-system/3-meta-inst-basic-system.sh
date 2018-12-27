@@ -74,12 +74,13 @@ cd /home
 ./ibasicsyssw39_gcctest.sh
 
 ###############-----------------########################################
-###Pendiente de revisar en instalar
 # Programs for package management: Graft and Qi
-#./ibasicsyssw8_lzip.sh 		$VER_lzip 	gz
-#./ibasicsyssw9_unzip.sh 	$VER_unzip 	gz
-#./ibasicsyssw10_graft.sh 	$VER_graft 	gz
-#./ibasicsyssw11_qi.sh 		$VER_qi
+#Se instalan en /tools ¿Tiene sentido?
+./ibasicsyssw8_lzip.sh 		$VER_lzip 	gz
+./ibasicsyssw9_unzip.sh 	$VER_unzip 	gz
+./ibasicsyssw10_graft.sh 	$VER_graft 	gz
+./ibasicsyssw11_qi.sh 		$VER_qi
+
 
 
 echo -e "
