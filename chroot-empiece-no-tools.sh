@@ -37,6 +37,9 @@ if [ $(id -u) -ne 0 ]
 fi
 
 . 0-var-general-rc
+
+./0-monta-sym.sh
+
 cd ${srcinst2}
 #Aquí es donde están los empieces
 #This is the path to the "starting" scripts

@@ -31,3 +31,5 @@ umount ${CLFS}/dev
 umount ${CLFS}/proc
 umount ${CLFS}/sys
 umount ${CLFS}/run
+
+umount ${particion}

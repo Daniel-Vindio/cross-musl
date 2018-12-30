@@ -45,7 +45,7 @@ export DIR_FUENTES FILE_BITACORA FILE_CHECKS
 #CLFS_TARGET32="i686-pc-linux-gnu"
 #export CLFS_TARGET32
 
-MAKEFLAGS='-j 4'
+MAKEFLAGS='-j 2'
 export MAKEFLAGS
 
 PKG_CONFIG_PATH="/usr/lib/pkgconfig"

@@ -31,6 +31,7 @@ fi
 . 0-var-general-rc
 . $dirversiones/versiones.sh
 
+./0-monta-sym.sh
 
 # Cross-Compiled Linux From Scratch
 # Version 3.0.0-SYSVINIT-x86_64-Multilib
@@ -73,13 +74,13 @@ cp -v $srcinst2/2-5-creacion-config-files.sh $croothome
 cp -v $srcinst3/* $croothome
 cp -v $dirversiones/versiones.sh $croothome
 
-touch $croothome/reg_instal-chroot.log
+touch $croothome/reg_instal.log
 touch $croothome/test.log
 
 #====== STAGE 2 ========================================================
 #Para instalación automática
-#./2-3-1-empiece-chroot.sh
+./2-3-1-empiece-chroot.sh
 
 #En esta fase de debugging mejor empezar con:
-./2-3-2-empiece-chroot.sh
+#./2-3-2-empiece-chroot.sh
 

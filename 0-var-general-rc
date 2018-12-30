@@ -17,10 +17,11 @@ export PATH
 CLFS=/mnt/clfs_MUSL
 export CLFS
 
-ln -svf $CLFS/tools /
-ln -svf $CLFS/cross-tools /
-
 unset CFLAGS CXXFLAGS
+
+#=================Variables para puntos de montaje =====================
+particion="/dev/sda9"
+
 
 #=================Variables para los meta instaladores==================
 srcdir=$(pwd)

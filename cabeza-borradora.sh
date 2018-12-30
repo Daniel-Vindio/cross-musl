@@ -47,6 +47,7 @@ fi
 
 . 0-var-general-rc
 
+./0-monta-sym.sh
 
 echo -e "\nBORRADO TOTAL DEL SISTEMA DE ARCHIVOS"
 echo -e "ERASING THE FILE SYSTEM COMPLETELY\n"
