@@ -82,6 +82,14 @@ cd /home
 ./ibasicsyssw11_qi.sh 		$VER_qi
 
 
+######## CONFIGURACIÓN DEL SISTEMA #####################################
+./ibasicsyssw68_gperf.sh $VER_gperf gz
+./ibasicsyssw120_eudev.sh $VER_eudev gz
+
+
+######## Instalación de RUNIT ##########################################
+
+
 
 echo -e "
 #############################################################\n\
