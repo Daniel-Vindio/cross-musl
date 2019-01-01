@@ -47,7 +47,11 @@ cd /home
 
 
 #-------Libc MUSL ------------------------------------------------------
+####------------------------------------PENDIENTE. Generar un paquete con la versión GIT.
+#Hace falta para que RUNIT compile
 ./ibasicsyssw14_musl.sh 		$VER_musl	gz
+
+
 #Adjusting the Toolchain and TESTS
 ./ibasicsyssw16_adjust.sh
 
@@ -60,6 +64,8 @@ cd /home
 
 
 #-------BINUTILS -------------------------------------------------------
+####-------------------------------------PENDIENTE. Generar un paquete con la versión GIT.
+#Hace falta para que RUNIT compile
 ./ibasicsyssw36_binutils.sh $VER_binutils gz
 
 
@@ -88,8 +94,21 @@ cd /home
 
 
 ######## Instalación de RUNIT ##########################################
+#instalación de strace a mano. Requiere AUTOCONF y automake
+#./ibasicsyssw75_automake.sh $VER_automake xz
+#./ibasicsyssw74_autoconf.sh $VER_autoconf xz
+#Instalo strace a mano
 
+#Instalo flex a mano
+#Instalo musl git a mano -------------------------------------------------hacer .tar
+#Instalo binutil git-dgb a mano ------------------------------------------hacer .tar
+#¿Recompilar gcc? Debería... No recompilo. Fincion
 
+#no funciona ./ibasicsyssw133_dietlibc.sh $VER_dietlibc xz
+
+# RUNIT COMPILA YA. Requiere versión GIT de Binutils (por si acaso 
+# actualizo musl a GIT)
+./ibasicsyssw132_runit.sh $VER_runit tar
 
 echo -e "
 #############################################################\n\
