@@ -64,6 +64,7 @@ cd /home
 
 
 #-------BINUTILS -------------------------------------------------------
+export VER_binutils="2.31.1.dev010119"
 ./ibasicsyssw36_binutils.sh $VER_binutils gz
 
 
