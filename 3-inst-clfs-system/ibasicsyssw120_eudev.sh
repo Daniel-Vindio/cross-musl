@@ -125,7 +125,7 @@ udevadm hwdb --update
 registro_error "udevadm hwdb --update"
 
 #make check 2>&1 | tee $FILE_CHECKS
-make LD_LIBRARY_PATH=/tools/lib check | tee $FILE_CHECKS
+#make LD_LIBRARY_PATH=/tools/lib check | tee $FILE_CHECKS
 
 ######------------------------------------------------------------------
 
