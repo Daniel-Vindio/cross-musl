@@ -41,14 +41,14 @@ cd /home
 ./ibasicsyssw18_m4.sh 			$VER_m4 	xz
 ./ibasicsyssw52_bc.sh 			$VER_bc gz
 ./ibasicsyssw131_shadow.sh 		$VER_shadow xz
+./ibasicsyssw130_help2man.sh $VER_help2man xz
+./ibasicsyssw134_flex.sh 		$VER_flex	gz
 
 #------Kernel Headers --------------------------------------------------
 ./ibasicsyssw12_linux.sh 		$VER_linux 	xz
 
 
 #-------Libc MUSL ------------------------------------------------------
-####------------------------------------PENDIENTE. Generar un paquete con la versión GIT.
-#Hace falta para que RUNIT compile
 ./ibasicsyssw14_musl.sh 		$VER_musl	gz
 
 
@@ -64,8 +64,6 @@ cd /home
 
 
 #-------BINUTILS -------------------------------------------------------
-####-------------------------------------PENDIENTE. Generar un paquete con la versión GIT.
-#Hace falta para que RUNIT compile
 ./ibasicsyssw36_binutils.sh $VER_binutils gz
 
 
@@ -95,19 +93,15 @@ cd /home
 
 ######## Instalación de RUNIT ##########################################
 #instalación de strace a mano. Requiere AUTOCONF y automake
-#./ibasicsyssw75_automake.sh $VER_automake xz
 #./ibasicsyssw74_autoconf.sh $VER_autoconf xz
+#./ibasicsyssw75_automake.sh $VER_automake xz
 #Instalo strace a mano
+#Posopngo esta instalaicón. Me interesa tenerlos para depueración, inclso
+#gdb.
 
-#Instalo flex a mano
-#Instalo musl git a mano -------------------------------------------------hacer .tar
-#Instalo binutil git-dgb a mano ------------------------------------------hacer .tar
-#¿Recompilar gcc? Debería... No recompilo. Fincion
+#No instalo de momento gdb, porque binutils lo lleva incorporado
 
 #no funciona ./ibasicsyssw133_dietlibc.sh $VER_dietlibc xz
-
-# RUNIT COMPILA YA. Requiere versión GIT de Binutils (por si acaso 
-# actualizo musl a GIT)
 ./ibasicsyssw132_runit.sh $VER_runit tar
 
 echo -e "
