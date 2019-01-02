@@ -28,9 +28,10 @@ fi
 # Directories are created from chroot
 #6.5. Creating Directories 
 
-proc_root=$(ls -id / | cut -d " " -f1)
-[ $proc_root == "2" ] && echo "Debe hacerse en chroot / must be chroot" \
-&& exit 1
+#Desactivado temporalmemte. No detecta bien el ch-root
+#proc_root=$(ls -id / | cut -d " " -f1)
+#[ $proc_root == "2" ] && echo "Debe hacerse en chroot / must be chroot" \
+#&& exit 1
 
 mkdir -pv /{bin,boot,etc/{opt,sysconfig},lib/firmware,mnt,opt}
 mkdir -pv /{media/{floppy,cdrom},sbin,srv,var}
