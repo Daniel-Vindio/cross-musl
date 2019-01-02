@@ -5,6 +5,7 @@ echo -e "
 #$0\n\
 ############################################################\n"
 
+./itmpsysmusl44_flex.sh			$VER_flex		gz
 ./itmpsysmusl16_gmp.sh 			$VER_gmp 		xz
 ./itmpsysmusl17_mpfr.sh 		$VER_mpfr 		xz
 ./itmpsysmusl18_mpc.sh 			$VER_mpc 		gz

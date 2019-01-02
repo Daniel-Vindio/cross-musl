@@ -105,6 +105,15 @@ registro_error "cp -v gcc/Makefile.in{,.orig}"
 sed 's@\./fixinc\.sh@-c true@' gcc/Makefile.in.orig > gcc/Makefile.in
 registro_error "sed fixincludes"
 
+#on x86_64 hosts,default directory name for 64-bit libraries to “lib”
+#en pruebas 
+case $(uname -m) in
+  x86_64)
+    sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64
+  ;;
+esac
+
+
 if [ -d "build" ] ; then
 	rm -rv "build"
 fi

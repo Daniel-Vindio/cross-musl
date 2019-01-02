@@ -1,4 +1,5 @@
-# Instalador de MUSL
+# Instalador de flex
+# MUSL.
 
 nombre=$(echo $0 | cut -d "." -f2 | cut -d "_" -f2)
 nombre_comp=$nombre-$1.tar.$2
@@ -73,18 +74,14 @@ cd $nombre_dir
 
 #----------------------CONFIGURE - MAKE - MAKE INSTALL------------------
 
-echo -e "\nInstalacion de $nombre_dir (MUSL x-comp)" >> $FILE_BITACORA
+echo -e "\nInstalacion de $nombre_dir para MUSL" >> $FILE_BITACORA
 
-CROSS_COMPILE=${CLFS_TARGET}- \
 ./configure \
 --prefix=/tools \
+--libdir=/tools/lib \
 --build=${CLFS_HOST} \
---target=${CLFS_TARGET} \
---disable-gcc-wrapper
+--host=${CLFS_TARGET}
 registro_error $MSG_CONF
-
-#--syslibdir=${CLFS}/lib \
-#--includedir=${CLFS}/usr/include
 
 make
 registro_error $MSG_MAKE
@@ -92,26 +89,18 @@ registro_error $MSG_MAKE
 make install
 registro_error $MSG_INST
 
-#cp ${CLFS}/usr/include/linux/if_slip.h ${CLFS}/usr/include/net/if_slip.h
-#cp ${CLFS}/usr/include/net/if_arp.h ${CLFS}/usr/include/linux/if_arp.h 
+cat > /tools/bin/lex << "EOF"
+#!/bin/bash
+# Begin /tools/bin/lex
 
-#ln -fv /tools/lib/libc.so /tools/lib/ld-musl-${CLFS_ARCH}.so.1
-ln -fv /tools/lib/libc.so /tools/lib/ld-musl-${CLFS_ARCH_m}.so.1
-registro_error $MSG_INST "ln -fv /tools/lib/libc.so ---"
+exec /tools/bin/flex -l "$@"
 
-mkdir -p /tools/etc
-registro_error "mkdir -p /tools/etc"
-
-cat > /tools/etc/ld-musl-${CLFS_ARCH_m}.path << "EOF"
-# ld-musl-${CLFS_ARCH_m}.path
-
-/tools/lib
-/tools/lib64
-#just in case. It shouldn't be needed.
-
-# End ld-musl-${CLFS_ARCH_m}.path
+# End /tools/bin/lex
 EOF
-registro_error "cat > /tools/etc/ld-musl..."
+registro_error "cat > /tools/bin/lex"
+
+chmod -v 755 /tools/bin/lex
+registro_error "chmod -v 755 /tools/bin/lex"
 
 
 ######------------------------------------------------------------------
@@ -123,8 +112,6 @@ rm -rf $nombre_dir && echo "Borrado el directorio $nombre_dir"
 #Registro de tiempos de ejecución
 T_FINAL=$(date +"%T")
 echo "$(date) $nombre <$MSG_TIME> $T_COMIENZO $T_FINAL" >> $FILE_BITACORA
-
-
 
 
 

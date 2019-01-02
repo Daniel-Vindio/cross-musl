@@ -12,6 +12,7 @@ echo -e "
 ############################################################\n"
 
 ./icrosstmusl1_file.sh 				$VER_file 	gz
+./icrosstmusl47_flex.sh				$VER_flex	gz
 ./icrosstmusl2_linux.sh 			$VER_linux 	xz
 ./icrosstmusl3_m4.sh 				$VER_m4 	xz
 ./icrosstmusl4_ncurses.sh 			$VER_ncurses gz
