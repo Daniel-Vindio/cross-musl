@@ -1,0 +1,10 @@
+#/etc/sysconfig/mouse
+#En la versión sin SysV, esto se activa directamente en el servicio de runit
+
+#MDEVICE="<yourdevice>"
+#PROTOCOL="<yourprotocol>"
+#GPMOPTS="<additional options>"
+
+MDEVICE="/dev/input/mice"
+PROTOCOL="imps2"
+GPMOPTS=""
