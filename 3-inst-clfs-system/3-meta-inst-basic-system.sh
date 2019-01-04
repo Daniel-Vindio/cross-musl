@@ -92,18 +92,25 @@ export VER_binutils="2.31.1.dev010119"
 ./ibasicsyssw120_eudev.sh $VER_eudev gz
 
 
-######## Instalación de RUNIT ##########################################
+######## Herramientas de DEPURACIÓN ####################################
 #instalación de strace a mano. Requiere AUTOCONF y automake
 #./ibasicsyssw74_autoconf.sh $VER_autoconf xz
 #./ibasicsyssw75_automake.sh $VER_automake xz
 #Instalo strace a mano
-#Posopngo esta instalaicón. Me interesa tenerlos para depueración, inclso
+#Pospongo esta instalación. Me interesa tenerlos para depuración, inclso
 #gdb.
-
 #No instalo de momento gdb, porque binutils lo lleva incorporado
 
-#no funciona ./ibasicsyssw133_dietlibc.sh $VER_dietlibc xz
-./ibasicsyssw132_runit.sh $VER_runit tar
+
+
+################## CONFIG FILES ########################################
+#A partir de aquí llamar a 4-config-files
+
+
+################## RUNIT ###############################################
+#./ibasicsyssw133_dietlibc.sh $VER_dietlibc xz --- no funciona ¿?
+#./ibasicsyssw132_runit.sh $VER_runit tar
+#Saco fuera de 3 la instalación de RUNIT
 
 echo -e "
 #############################################################\n\
