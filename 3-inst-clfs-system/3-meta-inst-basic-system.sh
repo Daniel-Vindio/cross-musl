@@ -76,16 +76,33 @@ export VER_binutils="2.31.1.dev010119"
 
 ########## SISTEMA #####################################################
 #******************* Asuntos Pedientes *********************************
-./ibasicsyssw46_pkg-config-lite.sh $VER_pkg 	gz
-./ibasicsyssw48_ncurses.sh $VER_ncurses 	gz
-
-
-./ibasicsyssw74_autoconf.sh $VER_autoconf xz
-./ibasicsyssw75_automake.sh $VER_automake xz
+./ibasicsyssw53_bzip2.sh 			$VER_bzip2 		gz
+./ibasicsyssw46_pkg-config-lite.sh 	$VER_pkg 		gz
+./ibasicsyssw48_ncurses.sh 			$VER_ncurses 	gz
+./ibasicsyssw55_attr.sh 			$VER_attr 		gz
+./ibasicsyssw58_acl.sh 				$VER_acl 		gz
+./ibasicsyssw59_libcap.sh 			$VER_libcap 	xz
+./ibasicsyssw44_sed.sh 				$VER_sed 		xz
+./ibasicsyssw61_psmisc.sh 			$VER_psmisc 	xz
+./ibasicsyssw62_iana.sh 			$VER_iana 		bz2
+./ibasicsyssw33_bison.sh 			$VER_bison 		xz
+./ibasicsyssw63_grep.sh 			$VER_grep 		xz
+./ibasicsyssw126_bash.sh 			$VER_bash 		gz
+./ibasicsyssw64_libtool.sh 			$VER_libtool 	xz
+./ibasicsyssw66_gdbm.sh 			$VER_gdbm 		gz
+./ibasicsyssw68_gperf.sh 			$VER_gperf 		gz
+./ibasicsyssw69_expat.sh 			$VER_expat 		bz2
+./ibasicsyssw71_inetutils.sh 		$VER_inetutils 	xz
+./ibasicsyssw135_perl.sh 			$VER_perl 		gz
+./ibasicsyssw72_xml-parser.sh 		$VER_xmlparser 	gz
+./ibasicsyssw73_intltool.sh 		$VER_intltool 	gz
+./ibasicsyssw74_autoconf.sh 		$VER_autoconf 	xz
+./ibasicsyssw75_automake.sh 		$VER_automake 	xz
+./ibasicsyssw76_xz.sh 				$VER_xz		 	xz
+./ibasicsyssw79_kmod.sh 			$VER_kmod	 	xz
 
 
 ########## CONFIGURACIÓN DEL SISTEMA ###################################
-./ibasicsyssw68_gperf.sh $VER_gperf gz
 ./ibasicsyssw120_eudev.sh $VER_eudev gz
 
 ########## 4 CONFIG FILES ##############################################
