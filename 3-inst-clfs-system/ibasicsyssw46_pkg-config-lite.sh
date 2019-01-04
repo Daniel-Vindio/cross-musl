@@ -1,5 +1,5 @@
-# Instalador de m4
-# Second installation. First in /tools, now in /usr
+# Instalador de pkg-config-lite
+# MUSL.
 
 nombre=$(echo $0 | cut -d "." -f2 | cut -d "_" -f2)
 nombre_comp=$nombre-$1.tar.$2
@@ -20,7 +20,6 @@ else
 	echo "$MOMENTO $nombre <$1> -> Conforme" >> $FILE_BITACORA
 fi
 }
-
 
 # $# es el nº de argumentos. Aquí se comprueba la sintaxis de la 
 # aplicación
@@ -74,19 +73,21 @@ cd $nombre_dir
 
 #----------------------CONFIGURE - MAKE - MAKE INSTALL------------------
 
-echo -e "\nInstalacion de $nombre_dir " >> $FILE_BITACORA
+echo -e "\nInstalacion de $nombre_dir MUSL" >> $FILE_BITACORA
 
-./configure \
---prefix=/usr
+./configure --prefix=/usr \
+--with-internal-glib \
+--disable-host-tool \
+--docdir=/usr/share/doc/pkg-config-$1
 registro_error $MSG_CONF
 
 make
 registro_error $MSG_MAKE
 
+#make check 2>&1 | tee $FILE_CHECKS
+
 make install
 registro_error $MSG_INST
-
-#make check 2>&1 | tee $FILE_CHECKS
 
 ######------------------------------------------------------------------
 
@@ -99,9 +100,7 @@ T_FINAL=$(date +"%T")
 echo "$(date) $nombre <$MSG_TIME> $T_COMIENZO $T_FINAL" >> $FILE_BITACORA
 
 
-#---Comments
-#First installation
-#./configure \
-#--prefix=/tools
+
+
 
 

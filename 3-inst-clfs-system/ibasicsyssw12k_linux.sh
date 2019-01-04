@@ -1,5 +1,5 @@
-# Instalador de m4
-# Second installation. First in /tools, now in /usr
+# Instalador de linux
+# Compila el KERNEL
 
 nombre=$(echo $0 | cut -d "." -f2 | cut -d "_" -f2)
 nombre_comp=$nombre-$1.tar.$2
@@ -74,19 +74,28 @@ cd $nombre_dir
 
 #----------------------CONFIGURE - MAKE - MAKE INSTALL------------------
 
-echo -e "\nInstalacion de $nombre_dir " >> $FILE_BITACORA
+echo -e "\nInstalacion de $nombre_dir Compilación KERNEL MUSL" >> $FILE_BITACORA
 
-./configure \
---prefix=/usr
-registro_error $MSG_CONF
+make mrproper
+registro_error "make mrproper"
+
+#Incorporar el .config
+cp -v ${srcinst6}/config .config
+registro_error "cp .config $PWD"
+
+make oldconfig
+registro_error "make oldconfig"
 
 make
-registro_error $MSG_MAKE
+registro_error "make"
 
-make install
-registro_error $MSG_INST
+make modules_install
+registro_error "modules_install"
 
-#make check 2>&1 | tee $FILE_CHECKS
+cp -iv arch/x86/boot/bzImage /boot/vmlinuz
+cp -iv System.map /boot/System.map
+cp -iv .config /boot/config
+
 
 ######------------------------------------------------------------------
 
@@ -99,9 +108,7 @@ T_FINAL=$(date +"%T")
 echo "$(date) $nombre <$MSG_TIME> $T_COMIENZO $T_FINAL" >> $FILE_BITACORA
 
 
-#---Comments
-#First installation
-#./configure \
-#--prefix=/tools
+
+
 
 

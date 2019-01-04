@@ -1,5 +1,5 @@
-# Instalador de m4
-# Second installation. First in /tools, now in /usr
+# Instalador de ncurses
+# MUSL.
 
 nombre=$(echo $0 | cut -d "." -f2 | cut -d "_" -f2)
 nombre_comp=$nombre-$1.tar.$2
@@ -74,19 +74,66 @@ cd $nombre_dir
 
 #----------------------CONFIGURE - MAKE - MAKE INSTALL------------------
 
-echo -e "\nInstalacion de $nombre_dir " >> $FILE_BITACORA
+echo -e "\nInstalacion de $nombre_dir MUSL" >> $FILE_BITACORA
+
+sed -i '/LIBTOOL_INSTALL/d' c++/Makefile.in
+registro_error "sed -i '/LIBTOOL_INSTALL/d' c++/Makefile.in"
 
 ./configure \
---prefix=/usr
+--prefix=/usr \
+--mandir=/usr/share/man \
+--with-shared \
+--without-debug \
+--without-normal \
+--enable-pc-files \
+--enable-widec
 registro_error $MSG_CONF
 
 make
-registro_error $MSG_MAKE
+registro_error "make"
 
 make install
-registro_error $MSG_INST
+registro_error "make install"
 
-#make check 2>&1 | tee $FILE_CHECKS
+mv -v /usr/lib/libncursesw.so.6* /lib
+registro_error "mv -v /usr/lib/"
+
+ln -sfv ../../lib/$(readlink /usr/lib/libncursesw.so) /usr/lib/libncursesw.so
+registro_error "ln -sfv ../"
+
+for lib in ncurses form panel menu ; do
+    rm -vf /usr/lib/lib${lib}.so
+    registro_error "rm $lib"
+    echo "INPUT(-l${lib}w)" > /usr/lib/lib${lib}.so
+    registro_error "echo $lib"
+    ln -sfv ${lib}w.pc /usr/lib/pkgconfig/${lib}.pc
+    registro_error "ln -svf $lib"
+done
+
+rm -vf /usr/lib/libcursesw.so
+registro_error "rm ..."
+
+echo "INPUT(-lncursesw)" > /usr/lib/libcursesw.so
+registro_error "ech ..."
+
+ln -sfv libncurses.so /usr/lib/libcurses.so
+registro_error "ln -svf ..."
+
+make distclean
+./configure \
+--prefix=/usr \
+--with-shared \
+--without-normal \
+--without-debug \
+--without-cxx-binding \
+--with-abi-version=5
+registro_error "./configure..."
+
+make sources libs
+registro_error "make..."
+
+cp -av lib/lib*.so.5* /usr/lib
+registro_error "cp..."
 
 ######------------------------------------------------------------------
 
@@ -97,11 +144,4 @@ rm -rf $nombre_dir && echo "Borrado el directorio $nombre_dir"
 #Registro de tiempos de ejecución
 T_FINAL=$(date +"%T")
 echo "$(date) $nombre <$MSG_TIME> $T_COMIENZO $T_FINAL" >> $FILE_BITACORA
-
-
-#---Comments
-#First installation
-#./configure \
-#--prefix=/tools
-
 
