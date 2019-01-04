@@ -31,11 +31,12 @@ srcinst2="$srcdir/2-inst-chroot"
 srcinst3="$srcdir/3-inst-clfs-system"
 srcinst4="$srcdir/4-config-files"
 srcinst5="$srcdir/5-runit"
+srcinst6="$srcdir/6-kernel"
 dirversiones="$srcdir/versiones"
 chrootqipkgs="$CLFS/qipkgs"
 croothome="$CLFS/home"
-export srcdir srcinst1 srcinst2 srcinst3 srcinst4 srcinst5 dirversiones \
-	   chrootqipkgs croothome 
+export srcdir srcinst1 srcinst2 srcinst3 srcinst4 srcinst5 srcinst6 \
+       dirversiones chrootqipkgs croothome 
 
 #=================Variables para los instaladores=======================
 #--Variables para mensajes

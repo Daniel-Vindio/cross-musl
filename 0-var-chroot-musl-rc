@@ -24,7 +24,8 @@ export croothome chrootqipkgs
 
 srcinst4="$croothome/4-config-files"
 srcinst5="$croothome/5-runit"
-export srcinst4 srcinst5
+srcinst6="$croothome/6-kernel"
+export srcinst4 srcinst5 srcinst6
 
 #=================Variables para los instaladores=======================
 #--Variables para mensajes

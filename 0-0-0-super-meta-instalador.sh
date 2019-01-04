@@ -76,6 +76,7 @@ cp -pv $dirversiones/versiones.sh $croothome
 
 cp -pvR $srcinst4 $croothome
 cp -pvR $srcinst5 $croothome
+cp -pvR $srcinst6 $croothome
 
 touch $croothome/reg_instal.log
 touch $croothome/test.log
