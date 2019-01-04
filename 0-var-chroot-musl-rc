@@ -22,6 +22,9 @@ croothome="/home"
 chrootqipkgs="/qipkgs"
 export croothome chrootqipkgs
 
+srcinst4="$croothome/4-config-files"
+srcinst5="$croothome/5-runit"
+export srcinst4 srcinst5
 
 #=================Variables para los instaladores=======================
 #--Variables para mensajes
@@ -45,7 +48,7 @@ export DIR_FUENTES FILE_BITACORA FILE_CHECKS
 #CLFS_TARGET32="i686-pc-linux-gnu"
 #export CLFS_TARGET32
 
-MAKEFLAGS='-j 2'
+MAKEFLAGS='-j 4'
 export MAKEFLAGS
 
 PKG_CONFIG_PATH="/usr/lib/pkgconfig"

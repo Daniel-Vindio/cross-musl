@@ -29,10 +29,12 @@ srcdir=$(pwd)
 srcinst1="$srcdir/1-inst-cross-tools-musl"
 srcinst2="$srcdir/2-inst-chroot"
 srcinst3="$srcdir/3-inst-clfs-system"
+srcinst4="$srcdir/4-config-files"
+srcinst5="$srcdir/5-runit"
 dirversiones="$srcdir/versiones"
 chrootqipkgs="$CLFS/qipkgs"
 croothome="$CLFS/home"
-export srcdir srcinst1 srcinst2 srcinst3 dirversiones \
+export srcdir srcinst1 srcinst2 srcinst3 srcinst4 srcinst5 dirversiones \
 	   chrootqipkgs croothome 
 
 #=================Variables para los instaladores=======================
@@ -74,6 +76,6 @@ export CLFS_HOST CLFS_TARGET
 CLFS_ENDIAN="little"
 export CLFS_ENDIAN
 
-MAKEFLAGS='-j 2'
+MAKEFLAGS='-j 4'
 export MAKEFLAGS
 

@@ -67,20 +67,23 @@ mkdir -v $chrootqipkgs
 chmod -v 777 $chrootqipkgs
 
 # 0-var-chroot-rc $croothome ojo a CLFS_TARGET32, recordar para qué vale.
-cp -v $srcdir/0-var-chroot-musl-rc $croothome
-cp -v $srcinst2/2-4-creacion-directorios.sh $croothome
-cp -v $srcinst2/2-5-creacion-config-files.sh $croothome
+cp -pv $srcdir/0-var-chroot-musl-rc $croothome
+cp -pv $srcinst2/2-4-creacion-directorios.sh $croothome
+cp -pv $srcinst2/2-5-creacion-config-files.sh $croothome
 
-cp -v $srcinst3/* $croothome
-cp -v $dirversiones/versiones.sh $croothome
+cp -pv $srcinst3/* $croothome
+cp -pv $dirversiones/versiones.sh $croothome
+
+cp -pvR $srcinst4 $croothome
+cp -pvR $srcinst5 $croothome
 
 touch $croothome/reg_instal.log
 touch $croothome/test.log
 
 #====== STAGE 2 ========================================================
 #Para instalación automática
-./2-3-1-empiece-chroot.sh
+#./2-3-1-empiece-chroot.sh
 
 #En esta fase de debugging mejor empezar con:
-#./2-3-2-empiece-chroot.sh
+./2-3-2-empiece-chroot.sh
 
