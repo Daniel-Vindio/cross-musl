@@ -100,6 +100,10 @@ export VER_binutils="2.31.1.dev010119"
 ./ibasicsyssw75_automake.sh 		$VER_automake 	xz
 ./ibasicsyssw76_xz.sh 				$VER_xz		 	xz
 ./ibasicsyssw79_kmod.sh 			$VER_kmod	 	xz
+./ibasicsyssw80_gettext.sh 			$VER_gettext 	xz
+##error###./ibasicsyssw82_libelf.sh $VER_libelf 	bz2
+./ibasicsyssw86_libffi.sh $VER_libffi 	gz
+##error###./ibasicsyssw87_openssl.sh $VER_openssl gz
 
 
 ########## CONFIGURACIÓN DEL SISTEMA ###################################
