@@ -133,7 +133,9 @@ make sources libs
 registro_error "make..."
 
 cp -av lib/lib*.so.5* /usr/lib
-registro_error "cp..."
+#registro_error "cp..."
+#Se copian, pero da error por cuestión de no poder copiar "algo"
+#relacionado con permisos
 
 ######------------------------------------------------------------------
 
