@@ -95,8 +95,9 @@ registro_error $MSG_MAKE
 make install 
 registro_error $MSG_INST
 
-chmod -v 0755 /usr/lib/preloadable_libintl.so
-registro_error "chmod"
+#chmod -v 0755 /usr/lib/preloadable_libintl.so
+#registro_error "chmod"
+# No existe esa lib ...
 
 #make check 2>&1 | tee $FILE_CHECKS
 
