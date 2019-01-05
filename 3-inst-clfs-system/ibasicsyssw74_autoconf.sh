@@ -84,7 +84,7 @@ make
 registro_error $MSG_MAKE
 
 #TESTSUITEFLAGS=-j4
-make check 2>&1 | tee $FILE_CHECKS
+#make check 2>&1 | tee $FILE_CHECKS
 
 make install 
 registro_error $MSG_INST

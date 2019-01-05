@@ -84,8 +84,8 @@ registro_error $MSG_CONF
 make
 registro_error $MSG_MAKE
 
-sed -i "s:./configure:LEXLIB=/usr/lib/libfl.a &:" t/lex-{clean,depend}-cxx.sh
-make -j4 check 2>&1 | tee $FILE_CHECKS
+#sed -i "s:./configure:LEXLIB=/usr/lib/libfl.a &:" t/lex-{clean,depend}-cxx.sh
+#make -j4 check 2>&1 | tee $FILE_CHECKS
 
 make install 
 registro_error $MSG_INST
