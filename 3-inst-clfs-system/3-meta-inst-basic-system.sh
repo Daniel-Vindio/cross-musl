@@ -131,6 +131,7 @@ export VER_binutils="2.31.1.dev010119"
 ./ibasicsyssw123_tar.sh $VER_tar xz
 ./ibasicsyssw125_texinfo.sh $VER_texinfo xz
 ./ibasicsyssw126_vim.sh $VER_vim bz2
+./ibasicsyssw128_gpm.sh $VER_gpm bz2
 
 ########## 4 CONFIG FILES ##############################################
 ./4-inst-config-files.sh
@@ -140,6 +141,8 @@ export VER_binutils="2.31.1.dev010119"
 
 ########## 6 KERNEL ####################################################
 ./ibasicsyssw12k_linux.sh 		$VER_linux 	xz
+
+########## 7 GRUB ######################################################
 
 
 ########## GRAFT y Qi ##################################################
