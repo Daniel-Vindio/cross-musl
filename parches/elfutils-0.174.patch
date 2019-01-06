@@ -1,0 +1,127 @@
+diff -Naur elfutils-0.174/lib/color.c elfutils-0.174-modif/lib/color.c
+--- elfutils-0.174/lib/color.c	2018-09-14 12:23:36.000000000 +0200
++++ elfutils-0.174-modif/lib/color.c	2019-01-06 21:59:14.536687197 +0100
+@@ -124,7 +124,7 @@
+ 	      }
+ 	  if (i == nvalues)
+ 	    {
+-	      error (0, 0, dgettext ("elfutils", "\
++	      err (0, dgettext ("elfutils", "\
+ %s: invalid argument '%s' for '--color'\n\
+ valid arguments are:\n\
+   - 'always', 'yes', 'force'\n\
+@@ -186,7 +186,7 @@
+ 			      {
+ 				if (asprintf (known[i].varp, "\e[%.*sm",
+ 					      (int) (env - val), val) < 0)
+-				  error (EXIT_FAILURE, errno,
++				  err (EXIT_FAILURE, 
+ 					 gettext ("cannot allocate memory"));
+ 				break;
+ 			      }
+diff -Naur elfutils-0.174/lib/fixedsizehash.h elfutils-0.174-modif/lib/fixedsizehash.h
+--- elfutils-0.174/lib/fixedsizehash.h	2017-10-06 15:07:24.000000000 +0200
++++ elfutils-0.174-modif/lib/fixedsizehash.h	2019-01-06 21:55:41.785429124 +0100
+@@ -30,7 +30,7 @@
+ #include <errno.h>
+ #include <stdlib.h>
+ #include <string.h>
+-#include <sys/cdefs.h>
++//#include <sys/cdefs.h>
+ 
+ #include <system.h>
+ 
+diff -Naur elfutils-0.174/lib/system.h elfutils-0.174-modif/lib/system.h
+--- elfutils-0.174/lib/system.h	2018-09-14 12:23:36.000000000 +0200
++++ elfutils-0.174-modif/lib/system.h	2019-01-06 21:54:09.568088199 +0100
+@@ -30,7 +30,8 @@
+ #define LIB_SYSTEM_H	1
+ 
+ #include <errno.h>
+-#include <error.h>
++//#include <error.h>
++#include <err.h>
+ #include <stddef.h>
+ #include <stdint.h>
+ #include <sys/param.h>
+diff -Naur elfutils-0.174/lib/xmalloc.c elfutils-0.174-modif/lib/xmalloc.c
+--- elfutils-0.174/lib/xmalloc.c	2018-09-14 12:23:36.000000000 +0200
++++ elfutils-0.174-modif/lib/xmalloc.c	2019-01-06 21:53:05.974190815 +0100
+@@ -49,7 +49,7 @@
+ 
+   p = malloc (n);
+   if (p == NULL)
+-    error (EXIT_FAILURE, 0, _("memory exhausted"));
++    err (EXIT_FAILURE, _("memory exhausted"));
+   return p;
+ }
+ 
+@@ -62,7 +62,7 @@
+ 
+   p = calloc (n, s);
+   if (p == NULL)
+-    error (EXIT_FAILURE, 0, _("memory exhausted"));
++    err (EXIT_FAILURE, _("memory exhausted"));
+   return p;
+ }
+ 
+@@ -74,6 +74,6 @@
+ {
+   p = realloc (p, n);
+   if (p == NULL)
+-    error (EXIT_FAILURE, 0, _("memory exhausted"));
++    err (EXIT_FAILURE, _("memory exhausted"));
+   return p;
+ }
+diff -Naur elfutils-0.174/libelf/elf.h elfutils-0.174-modif/libelf/elf.h
+--- elfutils-0.174/libelf/elf.h	2018-07-03 23:17:54.000000000 +0200
++++ elfutils-0.174-modif/libelf/elf.h	2019-01-06 21:55:08.738333107 +0100
+@@ -21,7 +21,7 @@
+ 
+ #include <features.h>
+ 
+-__BEGIN_DECLS
++//__BEGIN_DECLS
+ 
+ /* Standard ELF types.  */
+ 
+@@ -3915,6 +3915,6 @@
+ #define R_METAG_TLS_LE_HI16	60
+ #define R_METAG_TLS_LE_LO16	61
+ 
+-__END_DECLS
++//__END_DECLS
+ 
+ #endif	/* elf.h */
+diff -Naur elfutils-0.174/Makefile.am elfutils-0.174-modif/Makefile.am
+--- elfutils-0.174/Makefile.am	2018-03-28 16:21:33.000000000 +0200
++++ elfutils-0.174-modif/Makefile.am	2019-01-06 21:51:11.426480190 +0100
+@@ -27,8 +27,10 @@
+ pkginclude_HEADERS = version.h
+ 
+ # Add doc back when we have some real content.
+-SUBDIRS = config m4 lib libelf libebl libdwelf libdwfl libdw libcpu libasm \
+-	  backends src po tests
++# Add doc back when we have some real content.
++#SUBDIRS = config m4 lib libelf libebl libdwelf libdwfl libdw libcpu libasm \
++	  #backends src po tests
++SUBDIRS =  lib libelf
+ 
+ EXTRA_DIST = elfutils.spec GPG-KEY NOTES CONTRIBUTING \
+ 	     COPYING COPYING-GPLV2 COPYING-LGPLV3
+diff -Naur elfutils-0.174/Makefile.in elfutils-0.174-modif/Makefile.in
+--- elfutils-0.174/Makefile.in	2018-09-14 13:18:33.000000000 +0200
++++ elfutils-0.174-modif/Makefile.in	2019-01-06 21:51:21.314217755 +0100
+@@ -370,8 +370,10 @@
+ pkginclude_HEADERS = version.h
+ 
+ # Add doc back when we have some real content.
+-SUBDIRS = config m4 lib libelf libebl libdwelf libdwfl libdw libcpu libasm \
+-	  backends src po tests
++# Add doc back when we have some real content.
++#SUBDIRS = config m4 lib libelf libebl libdwelf libdwfl libdw libcpu libasm \
++	  #backends src po tests
++SUBDIRS =  lib libelf
+ 
+ EXTRA_DIST = elfutils.spec GPG-KEY NOTES CONTRIBUTING \
+ 	     COPYING COPYING-GPLV2 COPYING-LGPLV3
