@@ -1,0 +1,79 @@
+diff -Naur gpm-1.20.7/src/daemon/open_console.c gpm-1.20.7.modif/src/daemon/open_console.c
+--- gpm-1.20.7/src/daemon/open_console.c	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7.modif/src/daemon/open_console.c	2019-01-06 10:18:51.275169018 +0100
+@@ -30,6 +30,7 @@
+ 
+ #include "headers/message.h"        /* messaging in gpm  */
+ #include "headers/daemon.h"         /* daemon internals  */
++#include <sys/sysmacros.h> 			/* major() */ 
+ 
+ int open_console(const int mode)
+ {
+diff -Naur gpm-1.20.7/src/prog/display-buttons.c gpm-1.20.7.modif/src/prog/display-buttons.c
+--- gpm-1.20.7/src/prog/display-buttons.c	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7.modif/src/prog/display-buttons.c	2019-01-06 09:46:50.841372816 +0100
+@@ -36,7 +36,8 @@
+ #include <stdio.h>            /* printf()             */
+ #include <time.h>             /* time()               */
+ #include <errno.h>            /* errno                */
+-#include <gpm.h>              /* gpm information      */
++#include "headers/gpm.h"      /* gpm information      */
++#include <sys/select.h>
+ 
+ /* display resulting data */
+ int display_data(Gpm_Event *event, void *data)
+diff -Naur gpm-1.20.7/src/prog/display-coords.c gpm-1.20.7.modif/src/prog/display-coords.c
+--- gpm-1.20.7/src/prog/display-coords.c	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7.modif/src/prog/display-coords.c	2019-01-06 09:47:07.469249653 +0100
+@@ -37,7 +37,8 @@
+ #include <stdio.h>            /* printf()             */
+ #include <time.h>             /* time()               */
+ #include <errno.h>            /* errno                */
+-#include <gpm.h>              /* gpm information      */
++#include "headers/gpm.h"      /* gpm information      */
++#include <sys/select.h>
+ 
+ /* display resulting data */
+ int display_data(Gpm_Event *event, void *data)
+diff -Naur gpm-1.20.7/src/prog/get-versions.c gpm-1.20.7.modif/src/prog/get-versions.c
+--- gpm-1.20.7/src/prog/get-versions.c	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7.modif/src/prog/get-versions.c	2019-01-06 09:47:19.977157013 +0100
+@@ -22,7 +22,7 @@
+  ********/
+ 
+ #include <stdio.h>            /* printf()             */
+-#include <gpm.h>              /* gpm information      */
++#include "headers/gpm.h"      /* gpm information      */
+ 
+ int main()
+ {
+diff -Naur gpm-1.20.7/src/prog/gpm-root.y gpm-1.20.7.modif/src/prog/gpm-root.y
+--- gpm-1.20.7/src/prog/gpm-root.y	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7.modif/src/prog/gpm-root.y	2019-01-06 09:48:29.784640057 +0100
+@@ -1196,12 +1196,10 @@
+                                                         LOG_DAEMON : LOG_USER);
+    /* reap your zombies */
+    childaction.sa_handler=reap_children;
+-#if defined(__GLIBC__)
+-   __sigemptyset(&childaction.sa_mask);
+-#else /* __GLIBC__ */
+-   childaction.sa_mask=0;
+-#endif /* __GLIBC__ */
++   sigemptyset(&childaction.sa_mask);
++   #ifdef SA_INTERRUPT
+    childaction.sa_flags=SA_INTERRUPT; /* need to break the select() call */
++   #endif
+    sigaction(SIGCHLD,&childaction,NULL);
+ 
+    /*....................................... Connect and get your buffer */
+diff -Naur gpm-1.20.7/src/prog/open_console.c gpm-1.20.7.modif/src/prog/open_console.c
+--- gpm-1.20.7/src/prog/open_console.c	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7.modif/src/prog/open_console.c	2019-01-06 10:07:22.360262158 +0100
+@@ -22,6 +22,7 @@
+ #include "headers/message.h"        /* messaging in gpm */
+ #include "headers/daemon.h"         /* daemon internals */
+ #include <fcntl.h>
++#include <sys/sysmacros.h> 			/* major() */ 
+ 
+ int open_console(const int mode)
+ {
