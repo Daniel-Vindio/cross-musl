@@ -116,10 +116,7 @@ registro_error "mkdir2"
 make LD_LIBRARY_PATH=/tools/lib install
 registro_error $MSG_INST
 
-tar -xvf ../udev-lfs-20171102.tar.bz2
-registro_error "tar"
-make -f udev-lfs-20171102/Makefile.lfs install
-registro_error "make"
+###no hace falta dev-lfs-20171102.tar.bz2
 
 udevadm hwdb --update
 registro_error "udevadm hwdb --update"
