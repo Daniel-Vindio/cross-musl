@@ -84,7 +84,7 @@ echo -e "\nInstalacion de libelf $nombre_dir MUSL" >> $FILE_BITACORA
 #prefix=/usr
 
 make install
-registro_error $MSG_MAKE
+registro_error "make + install"
 
 ######------------------------------------------------------------------
 
