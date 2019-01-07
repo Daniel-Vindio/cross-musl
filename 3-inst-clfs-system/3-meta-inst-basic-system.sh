@@ -73,6 +73,13 @@ export VER_binutils="2.31.1.dev010119"
 #----Problema, no hay programa localedef ya que es parte de Glib
 #----y estamos instalando MUSL
 
+########## GRAFT y Qi ##################################################
+# Programs for package management: Graft and Qi
+#Se instalan en /tools ¿Tiene sentido? Ahora no
+#./ibasicsyssw8_lzip.sh 		$VER_lzip 	gz
+#./ibasicsyssw9_unzip.sh 	$VER_unzip 	gz
+#./ibasicsyssw10_graft.sh 	$VER_graft 	gz
+#./ibasicsyssw11_qi.sh 		$VER_qi
 
 ########## SISTEMA #####################################################
 #******************* Asuntos Pedientes *********************************
@@ -142,14 +149,22 @@ export VER_binutils="2.31.1.dev010119"
 ########## 6 KERNEL ####################################################
 ./ibasicsyssw12k_linux.sh 		$VER_linux 	xz
 
+########## ROOT PASWORD ################################################
+clear
+echo "============================================================"
+echo "Aviso:"
+echo "PON la contraseña para root"
+echo ""
+echo "============================================================"
+passwd root
 
-########## GRAFT y Qi ##################################################
-# Programs for package management: Graft and Qi
-#Se instalan en /tools ¿Tiene sentido? Ahora no
-#./ibasicsyssw8_lzip.sh 		$VER_lzip 	gz
-#./ibasicsyssw9_unzip.sh 	$VER_unzip 	gz
-#./ibasicsyssw10_graft.sh 	$VER_graft 	gz
-#./ibasicsyssw11_qi.sh 		$VER_qi
+########## AVISOS ######################################################
+echo "============================================================"
+echo "Aviso"
+echo "REVISAR achivos de configuración cargados por 4 CONFIG FILES"
+echo ""
+echo "============================================================"
+
 
 echo -e "
 #############################################################\n\

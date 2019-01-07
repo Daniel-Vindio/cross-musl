@@ -37,18 +37,18 @@ cd /home
 . 0-var-chroot-musl-rc
 . versiones.sh
 
-echo "========================================================="
-echo "Se trata de archivos de configuración ¿quieres parar para"
-echo "y ajustarlos? fstab y la partición ... por ejemplo"
-echo "Teclea SI para parar"
-echo "Cualquier tecla para continuar sin cambiarlos"
-echo "======================================================="
-read CS
-if [ "$CS" = "SI" ]
-	then
-		echo "exit"
-		exit
-fi
+#echo "========================================================="
+#echo "Se trata de archivos de configuración ¿quieres parar para"
+#echo "y ajustarlos? fstab y la partición ... por ejemplo"
+#echo "Teclea SI para parar"
+#echo "Cualquier tecla para continuar sin cambiarlos"
+#echo "======================================================="
+#read CS
+#if [ "$CS" = "SI" ]
+#	then
+#		echo "exit"
+#		exit
+#fi
 
 echo -e "\nInstalacion de ARCHIVOS DE CONFIGURACIÓN" >> $FILE_BITACORA
 
