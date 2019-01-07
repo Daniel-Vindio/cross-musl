@@ -36,7 +36,7 @@ attr acl libcap shadow psmisc iana libtool gdbm gperf expat inetutils \
 xmlparser intltool autoconf automake kmod elfutils libelf tcc libffi \
 openssl Python ninja meson procps e2fsprogs groff grub less iproute2 \
 kbd libpipeline sysklogd sysvinit eudev man_db dietlibc runit gpm \
-help2man musl"
+help2man musl libuargp"
 
 VER_PRUEBA="prueba_ok"
 #VER_binutils="2.30"
@@ -144,6 +144,8 @@ VER_gpm="1.20.7"
 VER_help2man="1.47.8"
 #VER_musl="1.1.20"
 VER_musl="1.1.20.dev010119"
+VER_libuargp="dev070119"
+
 
 for i in $paquetes; do
 	export VER_$i
