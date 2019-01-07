@@ -101,7 +101,8 @@ export VER_binutils="2.31.1.dev010119"
 ./ibasicsyssw76_xz.sh 				$VER_xz		 	xz
 ./ibasicsyssw79_kmod.sh 			$VER_kmod	 	xz
 ./ibasicsyssw80_gettext.sh 			$VER_gettext 	xz
-##error###./ibasicsyssw82_libelf.sh $VER_libelf 	bz2
+./ibasicsyssw136_libuargp.sh $VER_libuargp 	xz
+./ibasicsyssw82_libelf.sh $VER_libelf 	bz2
 ./ibasicsyssw86_libffi.sh $VER_libffi 	gz
 ./ibasicsyssw87_openssl.sh $VER_openssl gz
 ./ibasicsyssw89_Python.sh $VER_Python xz
@@ -131,7 +132,6 @@ export VER_binutils="2.31.1.dev010119"
 ./ibasicsyssw123_tar.sh $VER_tar xz
 ./ibasicsyssw125_texinfo.sh $VER_texinfo xz
 ./ibasicsyssw126_vim.sh $VER_vim bz2
-./ibasicsyssw128_gpm.sh $VER_gpm bz2
 
 ########## 4 CONFIG FILES ##############################################
 ./4-inst-config-files.sh
@@ -141,8 +141,6 @@ export VER_binutils="2.31.1.dev010119"
 
 ########## 6 KERNEL ####################################################
 ./ibasicsyssw12k_linux.sh 		$VER_linux 	xz
-
-########## 7 GRUB ######################################################
 
 
 ########## GRAFT y Qi ##################################################
