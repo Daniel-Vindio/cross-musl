@@ -1,0 +1,125 @@
+diff -Naur sysklogd-1.5.1.orig/klogd.c sysklogd-1.5.1.modif/klogd.c
+--- sysklogd-1.5.1.orig/klogd.c	2019-01-11 18:02:56.385080396 +0100
++++ sysklogd-1.5.1.modif/klogd.c	2019-01-11 17:43:01.645959442 +0100
+@@ -260,11 +260,12 @@
+ #include <unistd.h>
+ #include <signal.h>
+ #include <errno.h>
+-#include <sys/fcntl.h>
++//#include <sys/fcntl.h>
++#include <fcntl.h>
+ #include <sys/stat.h>
+-#if !defined(__GLIBC__)
+-#include <linux/time.h>
+-#endif /* __GLIBC__ */
++//#if !defined(__GLIBC__)
++//#include <linux/time.h>
++//#endif /* __GLIBC__ */
+ #include <stdarg.h>
+ #include <paths.h>
+ #include <stdlib.h>
+@@ -277,13 +278,13 @@
+ 
+ #define __LIBRARY__
+ #include <linux/unistd.h>
+-#if !defined(__GLIBC__)
+-# define __NR_ksyslog __NR_syslog
+-_syscall3(int,ksyslog,int, type, char *, buf, int, len);
+-#else
++//#if !defined(__GLIBC__)
++//# define __NR_ksyslog __NR_syslog
++//_syscall3(int,ksyslog,int, type, char *, buf, int, len);
++//#else
+ #include <sys/klog.h>
+ #define ksyslog klogctl
+-#endif
++//#endif
+ 
+ #define LOG_BUFFER_SIZE 4096
+ #define LOG_LINE_LENGTH 1000
+diff -Naur sysklogd-1.5.1.orig/ksym_mod.c sysklogd-1.5.1.modif/ksym_mod.c
+--- sysklogd-1.5.1.orig/ksym_mod.c	2019-01-11 18:02:56.385080396 +0100
++++ sysklogd-1.5.1.modif/ksym_mod.c	2019-01-11 17:41:09.580819630 +0100
+@@ -113,12 +113,13 @@
+ #include <unistd.h>
+ #include <signal.h>
+ #include <errno.h>
+-#include <sys/fcntl.h>
++//#include <sys/fcntl.h>
++#include <fcntl.h>
+ #include <sys/stat.h>
+ #include "module.h"
+-#if !defined(__GLIBC__)
+-#include <linux/time.h>
+-#endif /* __GLIBC__ */
++//#if !defined(__GLIBC__)
++//#include <linux/time.h>
++//#endif /* __GLIBC__ */
+ #include <stdarg.h>
+ #include <paths.h>
+ #include <linux/version.h>
+diff -Naur sysklogd-1.5.1.orig/pidfile.c sysklogd-1.5.1.modif/pidfile.c
+--- sysklogd-1.5.1.orig/pidfile.c	2019-01-11 18:02:56.389080463 +0100
++++ sysklogd-1.5.1.modif/pidfile.c	2019-01-11 17:44:34.142976383 +0100
+@@ -26,8 +26,10 @@
+ 
+ #include <stdio.h>
+ #include <unistd.h>
++#include <sys/types.h>
+ #include <sys/stat.h>
+ #include <sys/file.h>
++#include <fcntl.h>
+ #include <string.h>
+ #include <errno.h>
+ #include <signal.h>
+diff -Naur sysklogd-1.5.1.orig/syslog.c sysklogd-1.5.1.modif/syslog.c
+--- sysklogd-1.5.1.orig/syslog.c	2019-01-11 18:02:56.389080463 +0100
++++ sysklogd-1.5.1.modif/syslog.c	2019-01-11 17:45:34.041676944 +0100
+@@ -55,8 +55,11 @@
+ #include <sys/types.h>
+ #include <sys/socket.h>
+ #include <sys/file.h>
+-#include <sys/signal.h>
++//#include <sys/signal.h>
++#include <signal.h>
+ #include <sys/syslog.h>
++#include <sys/stat.h>
++#include <fcntl.h>
+ #if 0
+ #include "syslog.h"
+ #include "pathnames.h"
+diff -Naur sysklogd-1.5.1.orig/syslogd.c sysklogd-1.5.1.modif/syslogd.c
+--- sysklogd-1.5.1.orig/syslogd.c	2019-01-11 18:02:56.393080531 +0100
++++ sysklogd-1.5.1.modif/syslogd.c	2019-01-11 17:47:25.967921134 +0100
+@@ -532,7 +532,8 @@
+ #define SYSLOG_NAMES
+ #include <sys/syslog.h>
+ #include <sys/param.h>
+-#include <sys/errno.h>
++//#include <sys/errno.h>
++#include <errno.h>
+ #include <sys/ioctl.h>
+ #include <sys/stat.h>
+ #include <sys/wait.h>
+@@ -837,9 +838,9 @@
+ void init();
+ void cfline(char *line, register struct filed *f);
+ int decode(char *name, struct code *codetab);
+-#if defined(__GLIBC__)
++//#if defined(__GLIBC__)
+ #define dprintf mydprintf
+-#endif /* __GLIBC__ */
++//#endif /* __GLIBC__ */
+ static void dprintf(char *, ...);
+ static void allocate_log(void);
+ void sighup_handler();
+@@ -2171,7 +2172,8 @@
+ 	(void) signal(SIGCHLD, reapchild);	/* reset signal handler -ASP */
+ 	wait ((int *)0);
+ #else
+-	union wait status;
++	//union wait status;
++	int status;
+ 
+ 	while (wait3(&status, WNOHANG, (struct rusage *) NULL) > 0)
+ 		;
