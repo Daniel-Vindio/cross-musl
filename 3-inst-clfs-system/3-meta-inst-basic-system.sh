@@ -82,7 +82,6 @@ export VER_binutils="2.31.1.dev010119"
 #./ibasicsyssw11_qi.sh 		$VER_qi
 
 ########## SISTEMA #####################################################
-#******************* Asuntos Pedientes *********************************
 ./ibasicsyssw53_bzip2.sh 			$VER_bzip2 		gz
 ./ibasicsyssw46_pkg-config-lite.sh 	$VER_pkg 		gz
 ./ibasicsyssw48_ncurses.sh 			$VER_ncurses 	gz
@@ -108,37 +107,40 @@ export VER_binutils="2.31.1.dev010119"
 ./ibasicsyssw76_xz.sh 				$VER_xz		 	xz
 ./ibasicsyssw79_kmod.sh 			$VER_kmod	 	xz
 ./ibasicsyssw80_gettext.sh 			$VER_gettext 	xz
-./ibasicsyssw136_libuargp.sh $VER_libuargp 	xz
-./ibasicsyssw82_libelf.sh $VER_libelf 	bz2
-./ibasicsyssw86_libffi.sh $VER_libffi 	gz
-./ibasicsyssw87_openssl.sh $VER_openssl gz
-./ibasicsyssw89_Python.sh $VER_Python xz
-./ibasicsyssw91_ninja.sh $VER_ninja gz
-./ibasicsyssw92_meson.sh $VER_meson gz
-./ibasicsyssw93_procps-ng.sh $VER_procps xz
-./ibasicsyssw97_e2fsprogs.sh $VER_e2fsprogs gz
-./ibasicsyssw99_coreutils.sh $VER_coreutils xz
-./ibasicsyssw100_check.sh $VER_check gz
-./ibasicsyssw102_diffutils.sh $VER_diffutils xz
-./ibasicsyssw103_gawk.sh $VER_gawk xz
-./ibasicsyssw105_findutils.sh $VER_findutils gz
-./ibasicsyssw106_groff.sh $VER_groff gz
-./ibasicsyssw107_grub.sh $VER_grub xz
-./ibasicsyssw108_less.sh $VER_less gz
-./ibasicsyssw109_gzip.sh $VER_gzip xz
-./ibasicsyssw110_iproute2.sh $VER_iproute2 xz
-./ibasicsyssw112_kbd.sh $VER_kbd xz
-./ibasicsyssw114_libpipeline.sh $VER_libpipeline gz
-./ibasicsyssw115_make.sh $VER_make bz2
-./ibasicsyssw116_patch.sh $VER_patch xz
-###error###./ibasicsyssw117_sysklogd.sh $VER_sysklogd gz
-###./ibasicsyssw118_sysvinit.sh $VER_sysvinit bz2
-./ibasicsyssw120_eudev.sh $VER_eudev gz
-./ibasicsyssw96_util-linux.sh $VER_util_linux xz
-./ibasicsyssw121_man-db.sh $VER_man_db xz
-./ibasicsyssw123_tar.sh $VER_tar xz
-./ibasicsyssw125_texinfo.sh $VER_texinfo xz
-./ibasicsyssw126_vim.sh $VER_vim bz2
+./ibasicsyssw136_libuargp.sh 		$VER_libuargp 	xz
+./ibasicsyssw82_libelf.sh 			$VER_libelf 	bz2
+./ibasicsyssw86_libffi.sh 			$VER_libffi 	gz
+./ibasicsyssw87_openssl.sh 			$VER_openssl 	gz
+./ibasicsyssw89_Python.sh 			$VER_Python 	xz
+./ibasicsyssw91_ninja.sh 			$VER_ninja 		gz
+./ibasicsyssw92_meson.sh 			$VER_meson 		gz
+./ibasicsyssw93_procps-ng.sh 		$VER_procps 	xz
+./ibasicsyssw97_e2fsprogs.sh 		$VER_e2fsprogs 	gz
+./ibasicsyssw99_coreutils.sh 		$VER_coreutils 	xz
+./ibasicsyssw100_check.sh 			$VER_check 		gz
+./ibasicsyssw102_diffutils.sh 		$VER_diffutils 	xz
+./ibasicsyssw103_gawk.sh 			$VER_gawk 		xz
+./ibasicsyssw105_findutils.sh 		$VER_findutils 	gz
+./ibasicsyssw106_groff.sh 			$VER_groff 		gz
+./ibasicsyssw107_grub.sh 			$VER_grub 		xz
+./ibasicsyssw108_less.sh 			$VER_less 		gz
+./ibasicsyssw109_gzip.sh 			$VER_gzip 		xz
+./ibasicsyssw110_iproute2.sh 		$VER_iproute2 	xz
+./ibasicsyssw112_kbd.sh 			$VER_kbd 		xz
+./ibasicsyssw114_libpipeline.sh 	$VER_libpipeline gz
+./ibasicsyssw115_make.sh 			$VER_make 		bz2
+./ibasicsyssw116_patch.sh 			$VER_patch 		xz
+./ibasicsyssw117_sysklogd.sh 		$VER_sysklogd 	gz
+./ibasicsyssw120_eudev.sh 			$VER_eudev 		gz
+./ibasicsyssw96_util-linux.sh 		$VER_util_linux xz
+./ibasicsyssw121_man-db.sh 			$VER_man_db 	xz
+./ibasicsyssw123_tar.sh 			$VER_tar 		xz
+./ibasicsyssw125_texinfo.sh 		$VER_texinfo 	xz
+./ibasicsyssw126_vim.sh 			$VER_vim 		bz2
+
+#-----Adicionales ------------------------------------------------------
+./ibasicsyssw128_gpm.sh $VER_gpm bz2
+
 
 ########## 4 CONFIG FILES ##############################################
 ./4-inst-config-files.sh
@@ -149,21 +151,22 @@ export VER_binutils="2.31.1.dev010119"
 ########## 6 KERNEL ####################################################
 ./ibasicsyssw12k_linux.sh 		$VER_linux 	xz
 
+
 ########## ROOT PASWORD ################################################
 clear
-echo "============================================================"
+echo -e "============================================================\n"
 echo "Aviso:"
 echo "PON la contraseña para root"
 echo ""
-echo "============================================================"
+echo -e "============================================================\n"
 passwd root
 
 ########## AVISOS ######################################################
-echo "============================================================"
+echo -e "\n============================================================"
 echo "Aviso"
 echo "REVISAR achivos de configuración cargados por 4 CONFIG FILES"
 echo ""
-echo "============================================================"
+echo -e "============================================================\n"
 
 
 echo -e "
