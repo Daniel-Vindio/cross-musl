@@ -78,11 +78,10 @@ echo -e "\nInstalacion de $nombre_dir MUSL" >> $FILE_BITACORA
 ./configure \
 --prefix=/cross-tools \
 --host=${CLFS_TARGET} \
+--with-internal-glib \
 --with-pc-path=/tools/lib/pkgconfig:/tools/share/pkgconfig
 registro_error $MSG_CONF
 
-#--with-internal-glib
-    
 make
 registro_error $MSG_MAKE
 
