@@ -39,7 +39,6 @@ fi
 # 5. Constructing Cross-Compile Tools
 
 #If building on x86_64, this ensures the sanity of the toolchain
-#en pruebas
 case $(uname -m) in
   x86_64) mkdir -pv /tools/lib && ln -sfv /tools/lib /tools/lib64 ;;
 esac
