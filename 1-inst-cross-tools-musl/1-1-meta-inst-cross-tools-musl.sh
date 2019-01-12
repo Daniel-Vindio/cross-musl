@@ -3,7 +3,6 @@
 #-----------------------------------------------------------------------
 #Installation of the cross-tool required before building the temporary
 #system
-#Variables in variables-inst-cross-tools-multilib are required
 #-----------------------------------------------------------------------
 
 echo -e "
