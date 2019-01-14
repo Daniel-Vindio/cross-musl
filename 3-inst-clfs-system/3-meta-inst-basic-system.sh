@@ -40,7 +40,6 @@ cd /home
 ./ibasicsyssw50_readline.sh 	$VER_readline gz
 ./ibasicsyssw18_m4.sh 			$VER_m4 	xz
 ./ibasicsyssw52_bc.sh 			$VER_bc gz
-./ibasicsyssw131_shadow.sh 		$VER_shadow xz
 ./ibasicsyssw130_help2man.sh 	$VER_help2man xz
 ./ibasicsyssw134_flex.sh 		$VER_flex	gz
 #-----Kernel Headers ---------------------------------------------------
@@ -137,6 +136,7 @@ export VER_binutils="2.31.1.dev010119"
 ./ibasicsyssw123_tar.sh 			$VER_tar 		xz
 ./ibasicsyssw125_texinfo.sh 		$VER_texinfo 	xz
 ./ibasicsyssw126_vim.sh 			$VER_vim 		bz2
+./ibasicsyssw131_shadow.sh 		$VER_shadow xz
 
 #-----Adicionales ------------------------------------------------------
 ./ibasicsyssw128_gpm.sh $VER_gpm bz2
