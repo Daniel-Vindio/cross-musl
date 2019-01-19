@@ -76,8 +76,9 @@ cd $nombre_dir
 
 echo -e "\nInstalacion de $nombre_dir en /tools para gnulib" >> $FILE_BITACORA
 
+#Cambio de tools a usr.
 ./configure \
---prefix=/tools
+--prefix=/usr
 registro_error $MSG_CONF
 
 make
