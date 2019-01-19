@@ -95,7 +95,8 @@ cd build
 --enable-gold       \
 --enable-ld=default \
 --enable-plugins    \
---disable-werror
+--disable-werror \
+--disable-gdb
 registro_error $MSG_CONF
 
 make tooldir=/usr
