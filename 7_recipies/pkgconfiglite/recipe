@@ -1,0 +1,45 @@
+program="pkg-config-lite"
+version="$VER_pkg"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.gz
+
+description="
+
+The pkg-config package contains a tool for passing the include path 
+and/or library paths to build tools during the configure and make file 
+execution.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr \
+--with-internal-glib \
+--disable-host-tool \
+--docdir=/usr/share/doc/pkg-config-$version
+
+make
+
+make DESTDIR=${destdir} install
+
+}
+
+
+
+
+
+
+
+
+
+
+

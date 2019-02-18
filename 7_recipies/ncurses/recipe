@@ -1,0 +1,93 @@
+program="ncurses"
+version="$VER_ncurses"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.gz
+
+description="
+
+The ncurses (new curses) library is a free software emulation of curses 
+in System V Release 4.0 (SVr4), and more. It uses terminfo format, 
+supports pads and color and multiple highlights and forms characters 
+and function-key mapping, and has all the other SVr4-curses enhancements 
+over BSD curses. SVr4 curses became the basis of X/Open Curses.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+sed -i '/LIBTOOL_INSTALL/d' c++/Makefile.in
+
+./configure \
+--prefix=/usr \
+--mandir=/usr/share/man \
+--with-shared \
+--without-debug \
+--without-normal \
+--enable-pc-files \
+--enable-widec
+
+make
+
+make DESTDIR=${destdir} install
+
+mkdir -vp ${destdir}/lib
+mv -v ${destdir}/usr/lib/libncursesw.so.6* ${destdir}/lib
+
+ln -sfv ../../lib/$(readlink ${destdir}/usr/lib/libncursesw.so) ${destdir}/usr/lib/libncursesw.so
+
+for lib in ncurses form panel menu ; do
+	rm -vf ${destdir}/usr/lib/lib${lib}.so
+	echo "INPUT(-l${lib}w)" > ${destdir}/usr/lib/lib${lib}.so
+	ln -sfv ${lib}w.pc ${destdir}/usr/lib/pkgconfig/${lib}.pc
+done
+
+rm -vf ${destdir}/usr/lib/libcursesw.so
+echo "INPUT(-lncursesw)" > ${destdir}/usr/lib/libcursesw.so
+ln -sfv libncurses.so ${destdir}/usr/lib/libcurses.so
+
+make distclean
+./configure \
+--prefix=/usr \
+--with-shared \
+--without-normal \
+--without-debug \
+--without-cxx-binding \
+--with-abi-version=5
+
+make sources libs
+
+cp -av lib/lib*.so.5* ${destdir}/usr/lib
+
+#'lib/libform.so.5' -> '/usr/lib/libform.so.5'
+#cp: failed to preserve ownership for /usr/lib/libform.so.5: Not supported
+#'lib/libform.so.5.9' -> '/usr/lib/libform.so.5.9'
+#'lib/libmenu.so.5' -> '/usr/lib/libmenu.so.5'
+#cp: failed to preserve ownership for /usr/lib/libmenu.so.5: Not supported
+#'lib/libmenu.so.5.9' -> '/usr/lib/libmenu.so.5.9'
+#'lib/libncurses.so.5' -> '/usr/lib/libncurses.so.5'
+#cp: failed to preserve ownership for /usr/lib/libncurses.so.5: Not supported
+#'lib/libncurses.so.5.9' -> '/usr/lib/libncurses.so.5.9'
+#'lib/libpanel.so.5' -> '/usr/lib/libpanel.so.5'
+#cp: failed to preserve ownership for /usr/lib/libpanel.so.5: Not supported
+#'lib/libpanel.so.5.9' -> '/usr/lib/libpanel.so.5.9'
+
+}
+
+
+
+
+
+
+
+
+
+
+

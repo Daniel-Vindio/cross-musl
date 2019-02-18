@@ -1,0 +1,47 @@
+program="bash"
+version="$VER_bash"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.gz
+
+description="
+
+The Bash package contains the Bourne-Again SHell.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr \
+--docdir=/usr/share/doc/bash-$VER_bash \
+--without-bash-malloc
+
+#--with-installed-readline
+
+make
+
+make DESTDIR=${destdir} install
+
+mkdir -vp ${destdir}/bin
+mv -vf ${destdir}/usr/bin/bash ${destdir}/bin
+
+}
+
+
+
+
+
+
+
+
+
+
+

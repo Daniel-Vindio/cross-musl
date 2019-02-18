@@ -1,0 +1,39 @@
+program="musl"
+version="$VER_musl"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.gz
+
+description="
+
+Musl libc
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr \
+--disable-gcc-wrapper
+
+make
+make DESTDIR=${destdir} install
+}
+
+
+
+
+
+
+
+
+
+
+

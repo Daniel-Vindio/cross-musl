@@ -1,0 +1,45 @@
+program="psmisc"
+version="$VER_psmisc"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.xz
+
+description="
+
+The Psmisc package contains programs for displaying information about 
+running processes.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr
+
+make
+
+make DESTDIR=${destdir} install
+
+mkdir -vp ${destdir}/bin
+mv -v ${destdir}/usr/bin/fuser ${destdir}/bin
+mv -v ${destdir}/usr/bin/killall ${destdir}/bin
+
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,40 @@
+program="linux"
+version="$VER_linux"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.xz
+
+description="
+
+Kernel headers
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+
+make mrproper
+make INSTALL_HDR_PATH=dest headers_install
+find dest/include \( -name .install -o -name ..install.cmd \) -delete
+mkdir -vp ${destdir}/usr/include
+cp -rv dest/include/* ${destdir}/usr/include
+
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+program="gdbm"
+version="$VER_gdbm"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.gz
+
+description="
+
+The GDBM package contains the GNU Database Manager. This is a disk file 
+format database which stores key/data-pairs in single files. The actual 
+data of any record being stored is indexed by a unique key, which can 
+be retrieved in less time than if it was stored in a text file.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr \
+--disable-static \
+--enable-libgdbm-compat
+
+make
+
+make DESTDIR=${destdir} install
+}
+
+
+
+
+
+
+
+
+
+
+

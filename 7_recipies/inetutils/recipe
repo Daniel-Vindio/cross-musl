@@ -1,0 +1,56 @@
+program="inetutils"
+version="$VER_inetutils"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.xz
+
+description="
+
+Inetutils is a collection of common network programs. It includes:
+- An ftp client and server.
+- A telnet client and server.
+- etc.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr \
+--localstatedir=/var \
+--disable-logger \
+--disable-whois \
+--disable-rcp \
+--disable-rexec \
+--disable-rlogin \
+--disable-rsh \
+--disable-servers
+
+make
+
+make DESTDIR=${destdir} install
+
+mkdir -vp ${destdir}/bin
+mv -v ${destdir}/usr/bin/{hostname,ping,ping6,traceroute} ${destdir}/bin
+
+mkdir -vp ${destdir}/sbin
+mv -v ${destdir}/usr/bin/ifconfig ${destdir}/sbin
+}
+
+
+
+
+
+
+
+
+
+
+

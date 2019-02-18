@@ -1,0 +1,36 @@
+program="iana-etc"
+version="$VER_iana"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.bz2
+
+description="
+
+The Iana-Etc package provides data for network services and protocols.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+make
+
+make DESTDIR=${destdir} install
+}
+
+
+
+
+
+
+
+
+
+
+
