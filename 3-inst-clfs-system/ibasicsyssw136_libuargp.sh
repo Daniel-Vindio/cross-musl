@@ -77,7 +77,7 @@ cd $nombre_dir
 
 #----------------------CONFIGURE - MAKE - MAKE INSTALL------------------
 
-echo -e "\nInstalacion de libelf $nombre_dir MUSL" >> $FILE_BITACORA
+echo -e "\nInstalacion de libargp $nombre_dir MUSL" >> $FILE_BITACORA
 
 #No tiene configure. Directamente se puede modificar el Makefile
 #para poner:
