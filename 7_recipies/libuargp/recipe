@@ -1,0 +1,39 @@
+program="libuargp"
+version="$VER_libuargp"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.xz
+
+description="
+
+libuargp extracted from uclibc, modified lightly, intl-friendly 
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+#No tiene configure. Las opciones se cambian en Makefile
+#prefix=/usr
+#bindir=$(prefix)/bin
+#includedir=$(prefix)/include
+#libdir=$(prefix)/lib
+
+make DESTDIR=${destdir} install
+}
+
+
+
+
+
+
+
+
+
+
+

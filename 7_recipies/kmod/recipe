@@ -1,0 +1,60 @@
+program="kmod"
+version="$VER_kmod"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.xz
+
+description="
+
+The Kmod package contains libraries and utilities for loading kernel modules
+
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr \
+--bindir=/bin \
+--sysconfdir=/etc \
+--with-rootlibdir=/lib \
+--with-zlib \
+--with-xz
+
+make
+
+make DESTDIR=${destdir} install
+
+mkdir -pv ${destdir}/sbin
+for target in depmod insmod lsmod modinfo modprobe rmmod; do
+	ln -sfv ${destdir}/bin/kmod ${destdir}/sbin/$target
+done
+	
+	ln -sfv ${destdir}/bin/kmod ${destdir}/bin/lsmod
+	
+#'/sbin/depmod' -> '../bin/kmod'
+#'/sbin/insmod' -> '../bin/kmod'
+#'/sbin/lsmod' -> '../bin/kmod'
+#'/sbin/modinfo' -> '../bin/kmod'
+#'/sbin/modprobe' -> '../bin/kmod'
+#'/sbin/rmmod' -> '../bin/kmod'
+#'/bin/lsmod' -> 'kmod'
+}
+
+
+
+
+
+
+
+
+
+
+

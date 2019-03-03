@@ -1,0 +1,38 @@
+program="XML-Parser"
+version="$VER_xmlparser"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.gz
+
+description="
+
+The XML::Parser module is a Perl interface to James Clark's XML parser, Expat.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+perl Makefile.PL PREFIX=/tools INSTALLDIRS=perl
+
+make
+
+make DESTDIR=${destdir} install
+}
+
+
+
+
+
+
+
+
+
+
+

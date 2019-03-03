@@ -1,0 +1,45 @@
+program="intltool"
+version="$VER_intltool"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.gz
+
+description="
+
+intltool is a set of tools to centralize translation of many different 
+file formats using GNU gettext-compatible PO files.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+
+./configure \
+--prefix=/usr
+
+make
+
+make DESTDIR=${destdir} install
+
+mkdir -pv ${destdir}/usr/share/doc/intltool-$VER_intltool/I18N-HOWTO
+install -v -Dm644 doc/I18N-HOWTO ${destdir}/usr/share/doc/intltool-$VER_intltool/I18N-HOWTO
+
+}
+
+
+
+
+
+
+
+
+
+
+
