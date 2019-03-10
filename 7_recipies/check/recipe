@@ -1,0 +1,42 @@
+program="check"
+version="$VER_check"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.gz
+
+description="
+
+Check is a unit testing framework for C.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr
+
+make
+registro_error $MSG_MAKE
+
+make DESTDIR=${destdir} install
+
+sed -i '1 s/tools/usr/' ${destdir}/usr/bin/checkmk
+}
+
+
+
+
+
+
+
+
+
+
+

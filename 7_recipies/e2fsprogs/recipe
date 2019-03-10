@@ -1,0 +1,55 @@
+program="e2fsprogs"
+version="$VER_e2fsprogs"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.gz
+
+description="
+
+The E2fsprogs package contains the utilities for handling the ext2 file 
+system. It also supports the ext3 and ext4 journaling file systems..
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+mkdir -vp build
+cd build
+
+../configure \
+--prefix=/usr \
+--bindir=/bin \
+--with-root-prefix="" \
+--enable-elf-shlibs \
+--disable-libblkid \
+--disable-libuuid \
+--disable-fsck \
+--disable-uuidd
+
+make
+
+make DESTDIR=${destdir} install
+
+make DESTDIR=${destdir} install-libs
+
+chmod -v u+w ${destdir}/usr/lib/{libcom_err,libe2p,libext2fs,libss}.a
+
+}
+
+
+
+
+
+
+
+
+
+
+

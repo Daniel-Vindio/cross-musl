@@ -1,0 +1,40 @@
+program="less"
+version="$VER_less"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.gz
+
+description="
+
+The Less package contains a text file viewer.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr \
+--sysconfdir=/etc
+
+make
+
+make DESTDIR=${destdir} install
+}
+
+
+
+
+
+
+
+
+
+
+

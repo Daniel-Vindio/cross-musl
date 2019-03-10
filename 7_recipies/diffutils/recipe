@@ -1,0 +1,39 @@
+program="diffutils"
+version="$VER_diffutils"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.xz
+
+description="
+
+The Diffutils package contains programs that show the differences between files or directories.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr
+
+make
+
+make DESTDIR=${destdir} install
+}
+
+
+
+
+
+
+
+
+
+
+

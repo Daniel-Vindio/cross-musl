@@ -1,0 +1,60 @@
+program="readline"
+version="$VER_readline"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.gz
+
+description="
+
+ The GNU Readline library provides a set of functions for use by 
+ applications that allow users to edit command lines as they are typed 
+ in. Both Emacs and vi editing modes are available. The Readline 
+ library includes additional functions to maintain a list of 
+ previously-entered command lines, to recall and perhaps reedit those 
+ lines, and perform csh-like history expansion on previous commands.
+
+The history facilites are also placed into a separate library, 
+the History library, as part of the build process. The History library 
+may be used without Readline in applications which desire its capabilities. 
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+sed -i '/MV.*old/d' Makefile.in
+sed -i '/{OLDSUFF}/c:' support/shlib-install
+
+./configure \
+--prefix=/usr \
+--disable-static \
+--docdir=/usr/share/doc/readline-$VER_readline
+
+make SHLIB_LIBS="-L/tools/lib -lncursesw"
+
+make SHLIB_LIBS="-L/tools/lib -lncurses" DESTDIR=${destdir} install
+
+mkdir -pv ${destdir}/lib
+mv -v ${destdir}/usr/lib/lib{readline,history}.so.* ${destdir}/lib
+chmod -v u+w ${destdir}/lib/lib{readline,history}.so.*
+ln -sfv ../../lib/$(readlink ${destdir}/usr/lib/libreadline.so) ${destdir}/usr/lib/libreadline.so
+ln -sfv ../../lib/$(readlink ${destdir}/usr/lib/libhistory.so ) ${destdir}/usr/lib/libhistory.so
+
+}
+
+
+
+
+
+
+
+
+
+
+

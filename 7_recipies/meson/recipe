@@ -1,0 +1,47 @@
+program="meson"
+version="$VER_meson"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.gz
+
+description="
+
+Meson is an open source build system meant to be both extremely fast, 
+and, even more importantly, as user friendly
+as possible.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+python3 setup.py build
+
+python3 setup.py install --root=dest
+
+cp -rv dest/* ${destdir}/
+
+#'dest/usr/lib/python3.6/site-packages/meson-0.44.0-py3.6.egg-info/top_level.txt' -> 
+#'/usr/lib/python3.6/site-packages/meson-0.44.0-py3.6.egg-info/top_level.txt'
+
+#'dest/usr/lib/python3.6/site-packages/meson-0.44.0-py3.6.egg-info/top_level.txt' -> 
+#'/usr/src/qi/build/package-meson/usr/lib/python3.6/site-packages/meson-0.44.0-py3.6.egg-info/top_level.txt'
+
+}
+
+
+
+
+
+
+
+
+
+
+

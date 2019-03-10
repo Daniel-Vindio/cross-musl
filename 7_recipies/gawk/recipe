@@ -1,0 +1,39 @@
+program="gawk"
+version="$VER_gawk"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.xz
+
+description="
+
+The Gawk package contains programs for manipulating text files.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr
+
+make
+
+make DESTDIR=${destdir} install
+}
+
+
+
+
+
+
+
+
+
+
+

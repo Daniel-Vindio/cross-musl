@@ -1,0 +1,56 @@
+program="coreutils"
+version="$VER_coreutils"
+release="1"
+#arch=""
+
+
+tarname=${program}-${version}.tar.xz
+
+description="
+
+The Coreutils package contains utilities for showing and setting the 
+basic system characteristics.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+autoreconf -fiv
+
+FORCE_UNSAFE_CONFIGURE=1 \
+./configure \
+--prefix=/usr \
+--enable-no-install-program=kill,uptime
+
+FORCE_UNSAFE_CONFIGURE=1 make
+
+make DESTDIR=${destdir} install
+
+mkdir -pv ${destdir}/bin
+mkdir -pv ${destdir}/usr/bin
+mkdir -pv ${destdir}/usr/sbin
+mv -v ${destdir}/usr/bin/{cat,chgrp,chmod,chown,cp,date,dd,df,echo} ${destdir}/bin
+mv -v ${destdir}/usr/bin/{rmdir,stty,sync,true,uname} ${destdir}/bin
+mv -v ${destdir}/usr/bin/chroot ${destdir}/usr/sbin
+mv -v ${destdir}/usr/share/man/man1/chroot.1 ${destdir}/usr/share/man/man8/chroot.8
+sed -i s/\"1\"/\"8\"/1 ${destdir}/usr/share/man/man8/chroot.8
+mv -v ${destdir}/usr/bin/{head,sleep,nice} ${destdir}/bin
+mv -v ${destdir}/usr/bin/{false,ln,ls,mkdir,mknod,mv,pwd,rm} ${destdir}/bin
+}
+
+
+
+
+
+
+
+
+
+
+

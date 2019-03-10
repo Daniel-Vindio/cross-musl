@@ -1,0 +1,53 @@
+program="procps-ng"
+version="$VER_procps"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.xz
+
+description="
+
+The Procps-ng package contains programs for monitoring processes.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr \
+--exec-prefix= \
+--libdir=/usr/lib \
+--disable-static \
+--disable-kill
+
+make
+
+make DESTDIR=${destdir} install
+
+mkdir -p ${destdir}/lib
+mv -v ${destdir}/usr/lib/libprocps.so.* ${destdir}/lib
+ln -sfv ../../lib/$(readlink ${destdir}/usr/lib/libprocps.so) ${destdir}/usr/lib/libprocps.so
+
+
+#renamed '/usr/lib/libprocps.so.6' -> '/lib/libprocps.so.6'
+#renamed '/usr/lib/libprocps.so.6.0.0' -> '/lib/libprocps.so.6.0.0'
+#'/usr/lib/libprocps.so' -> '../../lib/libprocps.so.6.0.0'
+
+}
+
+
+
+
+
+
+
+
+
+
+
