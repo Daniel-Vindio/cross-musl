@@ -64,7 +64,7 @@ fi
 # mouse. No lo instalo. Va con el pripio servicio de runit
 configfiles1="console createfiles ifconfig.enp1s8 \
 ifconfig.wlp0s29f7u6 modules rc.site udev_retry \
-wpa_supplicant-wlp0s29f7u6.conf"
+wpa_supplicant-wlp0s29f7u6.conf syslog.conf vimrc"
 for i in ${configfiles1}; do
 	install -v -m0644 ${i} -t /etc/sysconfig
 	registro_error "${i} ok"
