@@ -109,7 +109,7 @@ export VER_binutils="2.31.1.dev010119"
 ./ibasicsyssw136_libuargp.sh 		$VER_libuargp 	xz
 ./ibasicsyssw82_libelf.sh 			$VER_libelf 	bz2
 ./ibasicsyssw86_libffi.sh 			$VER_libffi 	gz
-./ibasicsyssw87_openssl.sh 			$VER_openssl 	gz
+#./ibasicsyssw87_openssl.sh 			$VER_openssl 	gz
 ./ibasicsyssw89_Python.sh 			$VER_Python 	xz
 ./ibasicsyssw91_ninja.sh 			$VER_ninja 		gz
 ./ibasicsyssw92_meson.sh 			$VER_meson 		gz
@@ -136,7 +136,10 @@ export VER_binutils="2.31.1.dev010119"
 ./ibasicsyssw123_tar.sh 			$VER_tar 		xz
 ./ibasicsyssw125_texinfo.sh 		$VER_texinfo 	xz
 ./ibasicsyssw126_vim.sh 			$VER_vim 		bz2
-./ibasicsyssw131_shadow.sh 		$VER_shadow xz
+./ibasicsyssw131_shadow.sh 			$VER_shadow 	xz
+
+#Para MUSL
+./ibasicsyssw137_libressl.sh 		$VER_libressl 	gz
 
 #-----Adicionales ------------------------------------------------------
 ./ibasicsyssw128_gpm.sh $VER_gpm bz2
