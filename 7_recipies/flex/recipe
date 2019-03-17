@@ -1,0 +1,53 @@
+program="flex"
+version="$VER_flex"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.gz
+
+description="
+
+This is flex, the fast lexical analyzer generator.
+
+flex is a tool for generating scanners: programs which recognize 
+lexical patterns in text.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr
+
+make
+
+make DESTDIR=${destdir} install
+
+cat > ${destdir}/usr/bin/lex << "EOF"
+#!/bin/bash
+# Begin /usr/bin/lex
+
+exec /usr/bin/flex -l "$@"
+
+# End /usr/bin/lex
+EOF
+
+chmod -v 755 ${destdir}/usr/bin/lex
+}
+
+
+
+
+
+
+
+
+
+
+

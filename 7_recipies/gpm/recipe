@@ -1,0 +1,52 @@
+program="gpm"
+version="$VER_gpm"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.bz2
+
+description="
+
+The GPM (General Purpose Mouse daemon) package contains a mouse server 
+for the console and xterm. It not only provides cut and paste support 
+generally, but its library component is used by various software such 
+as Links to provide mouse support to the application.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+patch -Np1 -i ${tardir}/gpm-1.20.7.patch
+
+./autogen.sh
+
+./configure \
+--prefix=/usr \
+--sysconfdir=/etc
+
+make
+
+make DESTDIR=${destdir} install
+
+install -v -m644 conf/gpm-root.conf ${destdir}/etc
+
+mkdir -pv ${destdir}/usr/lib
+ln -sfv ${destdir}/libgpm.so.2.1.0 ${destdir}/usr/lib/libgpm.so
+}
+
+
+
+
+
+
+
+
+
+
+

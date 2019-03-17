@@ -1,0 +1,41 @@
+program="tar"
+version="$VER_tar"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.xz
+
+description="
+
+The Tar package contains an archiving program.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+FORCE_UNSAFE_CONFIGURE=1 \
+./configure \
+--prefix=/usr \
+--bindir=/bin
+
+make
+
+make DESTDIR=${destdir} install
+}
+
+
+
+
+
+
+
+
+
+
+

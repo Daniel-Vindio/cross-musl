@@ -1,0 +1,47 @@
+program="man-db"
+version="$VER_man_db"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.xz
+
+description="
+
+The Man-DB package contains programs for finding and viewing man pages.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+./configure \
+--prefix=/usr \
+--docdir=/usr/share/doc/man-db-$VER_man_db \
+--sysconfdir=/etc \
+--disable-setuid \
+--with-browser=/usr/bin/lynx \
+--with-vgrind=/usr/bin/vgrind \
+--with-grap=/usr/bin/grap \
+--enable-cache-owner=bin \
+--with-systemdtmpfilesdir=
+
+make
+
+make DESTDIR=${destdir} install
+}
+
+
+
+
+
+
+
+
+
+
+

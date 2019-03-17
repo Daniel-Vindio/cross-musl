@@ -1,0 +1,46 @@
+program="vim"
+version="$VER_vim"
+release="1"
+#arch=""
+
+tarname=${program}-${version}.tar.bz2
+srcdir="${program}80"
+
+
+description="
+
+The Vim package contains a powerful text editor.
+---
+"
+
+
+build() {
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
+#sed -i '/call/{s/split/xsplit/;s/303/492/}' src/testdir/test_recover.vim
+
+./configure \
+--prefix=/usr
+
+make
+
+make DESTDIR=${destdir} install
+
+#ln -sv ../vim/vim80/doc ${destdir}/usr/share/doc/$srcdir
+}
+
+
+
+
+
+
+
+
+
+
+
