@@ -1,0 +1,93 @@
+program="unzip"
+version="$VER_unzip"
+release="1"
+#arch=""
+
+tarname=${program}${version}.tar.gz
+srcdir="${program}${VER_unzip}"
+#unzip60.tar.gz
+
+
+description="
+
+UnZip is an extraction utility for archives compressed in .zip format (also
+called zipfiles).  Although highly compatible both with PKWARE's PKZIP
+and PKUNZIP utilities for MS-DOS and with Info-ZIP's own Zip program, our
+primary objectives have been portability and non-MSDOS functionality.
+http://infozip.sourceforge.net/
+---
+"
+
+
+build() {
+
+echo "tardir" ${tardir}
+echo "tarname" ${tarname}
+echo "srcdir" ${srcdir}
+echo "TMPDIR" ${TMPDIR}
+
+
+unpack "${tardir}/$tarname"
+cd "$srcdir"
+
+echo -e "\nCreación paquete Qi $program \n$(date)" >> $FILE_BITACORA
+
+#Necesita que se le aporte la fuente de bzip2. Hay que colocarla en ese
+#directorio que trae a tal efecto
+echo "-------> tar -xvf..."
+tar -xvf ${tardir}/bzip2-1.0.6.tar.gz -C ${TMPDIR}/unzip60/bzip2
+
+#No basta con poner las fuentes, es necesario compilar la librería libz2.a
+#Esto se hace dentro de las fuentes que acabamos de poner
+cd ${TMPDIR}/unzip60/bzip2/bzip2-1.0.6
+
+#Parece que traen cosas precompiladas. Hay que eliminar todo y partir de cero
+echo "-------> make distclean"
+make distclean
+
+#To make it more complicated, the normal build is not valid due some error
+#that is very well explined in the make file. As a consecuence a patch is
+#needen to produce BZ_NO_STDIO compiling.
+cp -v Makefile{,.orig}
+patch -N -i ${tardir}/ibasicsyssw9_unzip_bzip2-1.0.6.patch
+
+#The patch fixes something like
+#+	$(CC) $(CFLAGS) -DBZ_NO_STDIO -c blocksort.c
+#It is done un 7 sources used to build libz2.a
+
+#Only the library libz2.a is needed.
+echo "-------> make libbz2.a"
+make libbz2.a
+
+#And now configuring, that is also special.
+cd ../../unix
+echo "-------> ./configure gcc"
+./configure gcc "" ${tardir}/unzip60/bzip2/bzip2-1.0.6
+
+
+#The generic_gcc option is recommended. The makefile default is cc, but
+#in our chroot there is no cc --> gcc. They recommend not tu patch the 
+#Makefile, but to use generic_gcc
+cd ..
+echo "-------> make unix/Makefile generic_gcc"
+make -f unix/Makefile generic_gcc
+
+
+#There is a problem with the make install. (I don't have time to fix it
+#but is easy to install only the programs, without the manuals)
+
+mkdir -pv ${destdir}/usr/bin
+cp -v unzip funzip unzipsfx ${destdir}/usr/bin
+
+}
+
+
+
+
+
+
+
+
+
+
+
