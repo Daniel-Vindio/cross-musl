@@ -69,7 +69,8 @@ echo -e "\n---> Borrado de carpetas en $PWD"
 ls
 control_flujo
 rm -rf bin include lib libexec share x86_64-unknown-linux-gnu \
-x86_64-unknown-linux-musl i686-unknown-linux-musl i386-unknown-linux-musl
+x86_64-unknown-linux-musl i686-unknown-linux-musl i386-unknown-linux-musl \
+arm-linux-musleabihf
 
 
 cd ${CLFS}/tools
