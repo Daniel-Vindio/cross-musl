@@ -77,6 +77,10 @@ export VER_binutils="2.31.1.dev010119"
 #Se instalan en /tools ¿Tiene sentido? Ahora no
 #./ibasicsyssw8_lzip.sh 		$VER_lzip 	gz
 #./ibasicsyssw9_unzip.sh 	$VER_unzip 	gz
+##Añadidos en abril 2014 para la versión 1.0 de Qi
+#./ibasicsyssw138_lzlib.sh $VER_lzlib gz
+#./ibasicsyssw139_tarlz.sh	$VER_tarlz
+#
 #./ibasicsyssw10_graft.sh 	$VER_graft 	gz
 #./ibasicsyssw11_qi.sh 		$VER_qi
 
@@ -150,6 +154,8 @@ export VER_binutils="2.31.1.dev010119"
 
 ########## 5 RUNIT #####################################################
 ./5-inst-runit.sh
+# Este es para instalar primero qi.
+#./5-inst-runit-pkg.sh
 
 ########## 6 KERNEL ####################################################
 ./ibasicsyssw12k_linux.sh 		$VER_linux 	xz
