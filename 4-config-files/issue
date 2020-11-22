@@ -1,0 +1,14 @@
+
+
+\e{bold} _     _                 _\e{reset}
+\e{bold}| |__ (_)___  ___  _ __ | |_ ___\e{reset}
+\e{bold}| '_ \\| / __|/ _ \\| '_ \\| __/ _ \\\e{reset}
+\e{bold}| |_) | \\__ \\ (_) | | | | ||  __/\e{reset}
+\e{bold}|_.__/|_|___/\\___/|_| |_|\\__\\___|\e{reset}
+
+\e{bold}  From Cantabria to California!\e{reset}
+                                 
+Bisonte is an Operating System design to run on aarch64.
+
+
+
