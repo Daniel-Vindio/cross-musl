@@ -41,7 +41,7 @@ echo -e "\nInstalacion de $nombre_dir en MUSL" >> $FILE_BITACORA
 mkdir -v -p /package
 chmod -v 1755 /package
 cd /package
-cp -v $DIR_FUENTES/${nombre_comp} .
+cp -v $DIR_FUENTES/${nombre_comp}.gz .
 gunzip ${nombre_comp}
 tar -xpf ${nombre_comp}
 rm -v ${nombre_comp}
