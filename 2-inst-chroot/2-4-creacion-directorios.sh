@@ -88,5 +88,7 @@ do
 done
 #control_flujo
 
+install -vdm666 /etc/wpa_supplicant
+
 ln -sv bash /bin/sh
 #control_flujo
