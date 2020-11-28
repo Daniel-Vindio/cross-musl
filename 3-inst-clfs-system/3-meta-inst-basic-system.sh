@@ -16,9 +16,8 @@ control_flujo () {
 }
 
 cd /home
-
-. 0-var-chroot-musl-rc
-. versiones.sh
+. *-rc
+. versiones-${vertoinstall}.sh
 
 ./2-4-creacion-directorios.sh
 ./2-5-creacion-config-files.sh
