@@ -10,6 +10,7 @@ me=$0
 # ¿Quién usa USER_Build_machine? Lo dejo en las generales...
 USER_Build_machine="daniel"
 USER_Target="daniel"
+IP_Target="192.168.0.254"
 
 
 # Variables para particiones y puntos de montaje
