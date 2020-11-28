@@ -36,7 +36,7 @@ attr acl libcap shadow psmisc iana libtool gdbm gperf expat inetutils \
 xmlparser intltool autoconf automake kmod elfutils libelf tcc libffi \
 openssl Python ninja meson procps e2fsprogs groff grub less iproute2 \
 kbd libpipeline sysklogd sysvinit eudev man_db dietlibc runit gpm \
-help2man musl libuargp libressl"
+help2man musl libuargp libressl lzlib tarlz"
 
 VER_PRUEBA="prueba_ok"
 #VER_binutils="2.30"
@@ -157,6 +157,8 @@ VER_help2man="1.47.8"
 VER_musl="1.1.21"
 VER_libuargp="dev070119"
 VER_libressl="2.8.3"
+VER_lzlib="1.11"
+VER_tarlz="0.15"
 
 
 for i in $paquetes; do
