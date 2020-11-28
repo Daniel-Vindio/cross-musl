@@ -60,9 +60,9 @@ cd $nombre_dir
 echo -e "\nInstalacion de $nombre_dir " >> $FILE_BITACORA
 
 ./configure 			\
---prefix=/usr			\
---packagedir=/usr/pkg 	\
---targetdir=/usr
+--prefix=/usr
+#--packagedir=/usr/pkg 	\
+#--targetdir=/usr
 registro_error $MSG_CONF
 
 #--packagedir= package installation directory [$(prefix)/pkg]

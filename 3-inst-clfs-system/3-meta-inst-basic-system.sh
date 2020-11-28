@@ -16,9 +16,8 @@ control_flujo () {
 }
 
 cd /home
-
-. 0-var-chroot-musl-rc
-. versiones.sh
+. *-rc
+. versiones-${vertoinstall}.sh
 
 ./2-4-creacion-directorios.sh
 ./2-5-creacion-config-files.sh
@@ -150,7 +149,8 @@ export VER_binutils="2.31.1.dev010119"
 
 
 ########## 4 CONFIG FILES ##############################################
-./4-inst-config-files.sh
+# Los config file se crearán antes de entrar en chroot.
+#./4-inst-config-files.sh
 
 ########## 5 RUNIT #####################################################
 ./5-inst-runit.sh

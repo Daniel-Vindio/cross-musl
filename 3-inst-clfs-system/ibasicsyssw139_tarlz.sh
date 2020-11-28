@@ -58,7 +58,8 @@ cd $nombre_dir
 echo -e "\nInstalacion de $nombre_dir " >> $FILE_BITACORA
 
 ./configure 			\
---prefix=/tools
+--prefix=/usr
+#--prefix=/tools
 registro_error $MSG_CONF
 
 make

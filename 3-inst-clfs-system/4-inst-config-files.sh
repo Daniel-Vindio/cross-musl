@@ -33,9 +33,8 @@ fi
 #Debe instalarse desde chroot, y debe existir /home y /boot, si no que
 # abandonde.
 cd /home
-
-. 0-var-chroot-musl-rc
-. versiones.sh
+. *-rc
+. versiones-${vertoinstall}.sh
 
 #echo "========================================================="
 #echo "Se trata de archivos de configuración ¿quieres parar para"
