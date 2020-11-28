@@ -62,7 +62,7 @@ cd $srcinst2
 mkdir -v $croothome_hst
 chmod -v 777 $croothome_hst
 
-cp -pv $srcdir/0-var-chroot-musl-rc $croothome_hst
+cp -pv $srcdir/$var_220 $croothome_hst
 cp -pv $srcinst2/2-4-creacion-directorios.sh $croothome_hst
 cp -pv $srcinst2/2-5-creacion-config-files.sh $croothome_hst
 

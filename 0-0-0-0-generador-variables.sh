@@ -53,7 +53,7 @@ srcinst8="$srcdir/$carpeta8"
 dirversiones="$srcdir/$carpeta_ver"
 
 # Homes
-# En el chroot
+# En el chroot. NO CAMBIAR
 croothome_tgt="/home"
 # Antes de entrar en chroot
 croothome_hst="${CLFS}${croothome_tgt}"
