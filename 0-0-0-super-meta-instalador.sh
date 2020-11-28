@@ -29,7 +29,7 @@ fi
 
 #====== STAGE 1 ========================================================
 . 0-var-general-rc
-. $dirversiones/versiones.sh
+. $dirversiones/versiones-${vertoinstall}.sh
 
 ./0-monta-sym.sh
 
@@ -59,31 +59,32 @@ cd $srcinst2
 #Some stuff (files of variables and instalators mainly) has to be copied
 #within the chroot environment.
 
-mkdir -v $croothome
-chmod -v 777 $croothome
+mkdir -v $croothome_hst
+chmod -v 777 $croothome_hst
 
-mkdir -v $chrootqipkgs
-chmod -v 777 $chrootqipkgs
+cp -pv $srcdir/0-var-chroot-musl-rc $croothome_hst
+cp -pv $srcinst2/2-4-creacion-directorios.sh $croothome_hst
+cp -pv $srcinst2/2-5-creacion-config-files.sh $croothome_hst
 
-# 0-var-chroot-rc $croothome ojo a CLFS_TARGET32, recordar para qué vale.
-cp -pv $srcdir/0-var-chroot-musl-rc $croothome
-cp -pv $srcinst2/2-4-creacion-directorios.sh $croothome
-cp -pv $srcinst2/2-5-creacion-config-files.sh $croothome
+cp -pv $srcinst3/* $croothome_hst
+cp -pv $dirversiones/versiones-${vertoinstall}.sh $croothome_hst
 
-cp -pv $srcinst3/* $croothome
-cp -pv $dirversiones/versiones.sh $croothome
+cp -pvR $srcinst4 $croothome_hst
+cp -pvR $srcinst5 $croothome_hst
+cp -pvR $srcinst6 $croothome_hst
+cp -pvR $srcinst7 $croothome_hst
+# No se copia 8, ya que los paquetes se generarán en el propio sistema
+# a partir de las recetas de 7.
+mkdir -v $croothome_hst/$carpeta8
+chmod -v 777 $croothome_hst/$carpeta8
 
-cp -pvR $srcinst4 $croothome
-cp -pvR $srcinst5 $croothome
-cp -pvR $srcinst6 $croothome
-
-touch $croothome/reg_instal.log
-touch $croothome/test.log
+touch $croothome_hst/reg_instal.log
+touch $croothome_hst/test.log
 
 #====== STAGE 2 ========================================================
 #Para instalación automática
-#./2-3-1-empiece-chroot.sh
+./2-3-1-empiece-chroot.sh
 
 #En esta fase de debugging mejor empezar con:
-./2-3-2-empiece-chroot.sh
+#./2-3-2-empiece-chroot.sh
 

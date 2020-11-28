@@ -15,7 +15,7 @@ fi
 . 0-var-general-rc
 
 mount -v -t ext4 ${particion} ${CLFS}
-#mount -v -t ext4 ${particionsrc} ${CLFS}/sources
+mount -v -t ext4 ${particionsrc} ${CLFS}/sources
 
 ln -svf ${CLFS}/tools /
 ln -svf ${CLFS}/cross-tools /
