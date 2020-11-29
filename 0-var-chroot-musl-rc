@@ -13,6 +13,10 @@ set +h
 var_220=0-var-chroot-musl-rc
 export var_220
 
+particion=/dev/sda9
+CLFS_ARCH_m=x86_64
+export particion CLFS_ARCH_m
+
 vertoinstall=0
 export vertoinstall
 
