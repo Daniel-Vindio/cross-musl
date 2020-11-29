@@ -18,7 +18,7 @@ IP_Target="192.168.0.254"
 
 # En el HOST=BUILD=TARGET
 # ----------------
-particion="/dev/sda8"
+particion="/dev/sda9"
 particionsrc="/dev/sda6"
 CLFS="/mnt/clfs_MUSL"
 
@@ -31,7 +31,7 @@ carpeta3="3-inst-clfs-system"
 carpeta4="4-config-files"
 carpeta5="5-runit"
 carpeta6="6-kernel"
-carpeta7="7-recipes"
+carpeta7="7_recipies"
 carpeta8="8-qipkgs"
 carpeta_ver="versiones"
 carpeta_reg="registros"
@@ -83,7 +83,7 @@ bitacora_chroot="reg_instal_chroot-tgt.log"
 # a esas fuentes hay que montar la dirección correspondiente (en ese caso
 # hay que poner a fuentes_target el prefijo adecuado, o desde el chroot
 # y ahí solo es /usr/src...
-fuentes_target="/usr/src/sources"
+fuentes_target="/sources"
 
 # Nombres de los archivos de variables
 #=====================================
@@ -117,7 +117,7 @@ MSG_TIME="Tiempo de instalación"
 
 # Versión instalada
 # -----------------
-vertoinstall="6"
+vertoinstall="0"
 
 # PATH para la compilación cruzada
 path_cross="/cross-tools/bin:/bin:/usr/bin"
@@ -134,7 +134,7 @@ CLFS_TARGET="${CLFS_ARCH_m}-unknown-linux-musl"
 PKG_CONFIG_PATH="/usr/lib/pkgconfig"
 
 # Velocidad de compilación. Se recomienda 1 para pruebas sin prisas.
-MAKEFLAGS="-j 1"
+MAKEFLAGS="-j 2"
 
 # Variables de compilación cruzada para los instaladores de 1-2
 # **** NO EDITAR ****
@@ -230,8 +230,12 @@ export DIR_FUENTES
 FILE_BITACORA=$bitacora_host
 export FILE_BITACORA
 
+bitacora_chroot=$bitacora_chroot
+export bitacora_chroot
+
 USER_Build_machine=$USER_Build_machine
-export USER_Build_machine
+USER_Target=$USER_Target
+export USER_Build_machine USER_Target
 
 EOF
 
@@ -265,7 +269,12 @@ set +h
 var_220=$var_220
 export var_220
 
+vertoinstall=$vertoinstall
+export vertoinstall
+
 croothome_tgt=$croothome_tgt
+srcinst2="$croothome_tgt/$carpeta2"
+srcinst3="$croothome_tgt/$carpeta3"
 srcinst4="$croothome_tgt/$carpeta4"
 srcinst5="$croothome_tgt/$carpeta5"
 srcinst6="$croothome_tgt/$carpeta6"
@@ -276,14 +285,14 @@ export croothome_tgt srcinst4 srcinst5 srcinst6 srcinst7 srcinst8
 DIR_FUENTES=${fuentes_target}
 export DIR_FUENTES
 
-FILE_BITACORA=${croothome_tgt}/${carpeta_reg}/${bitacora_chroot}
+FILE_BITACORA=${croothome_tgt}/${bitacora_chroot}
 export FILE_BITACORA
 
 MAKEFLAGS='$MAKEFLAGS'
 export MAKEFLAGS
 
 PKG_CONFIG_PATH=$PKG_CONFIG_PATH
-exportPKG_CONFIG_PATH
+export PKG_CONFIG_PATH
 
 MSG_CONF="$MSG_CONF"
 MSG_MAKE="$MSG_MAKE"

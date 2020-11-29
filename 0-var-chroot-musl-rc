@@ -13,25 +13,30 @@ set +h
 var_220=0-var-chroot-musl-rc
 export var_220
 
+vertoinstall=0
+export vertoinstall
+
 croothome_tgt=/home
+srcinst2="/home/2-inst-chroot"
+srcinst3="/home/3-inst-clfs-system"
 srcinst4="/home/4-config-files"
 srcinst5="/home/5-runit"
 srcinst6="/home/6-kernel"
-srcinst7="/home/7-recipes"
+srcinst7="/home/7_recipies"
 srcinst8="/home/8-qipkgs"
 export croothome_tgt srcinst4 srcinst5 srcinst6 srcinst7 srcinst8
 
-DIR_FUENTES=/usr/src/sources
+DIR_FUENTES=/sources
 export DIR_FUENTES
 
-FILE_BITACORA=/home/registros/reg_instal_chroot-tgt.log
+FILE_BITACORA=/home/reg_instal_chroot-tgt.log
 export FILE_BITACORA
 
-MAKEFLAGS='-j 1'
+MAKEFLAGS='-j 2'
 export MAKEFLAGS
 
 PKG_CONFIG_PATH=/usr/lib/pkgconfig
-exportPKG_CONFIG_PATH
+export PKG_CONFIG_PATH
 
 MSG_CONF="Configure"
 MSG_MAKE="Make"

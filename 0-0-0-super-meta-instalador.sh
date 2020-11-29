@@ -60,26 +60,23 @@ cd $srcinst2
 #within the chroot environment.
 
 mkdir -v $croothome_hst
-chmod -v 777 $croothome_hst
-
-cp -pv $srcdir/$var_220 $croothome_hst
-cp -pv $srcinst2/2-4-creacion-directorios.sh $croothome_hst
-cp -pv $srcinst2/2-5-creacion-config-files.sh $croothome_hst
-
-cp -pv $srcinst3/* $croothome_hst
-cp -pv $dirversiones/versiones-${vertoinstall}.sh $croothome_hst
-
+cp -pvR $srcinst3 $croothome_hst
 cp -pvR $srcinst4 $croothome_hst
 cp -pvR $srcinst5 $croothome_hst
 cp -pvR $srcinst6 $croothome_hst
 cp -pvR $srcinst7 $croothome_hst
-# No se copia 8, ya que los paquetes se generarán en el propio sistema
-# a partir de las recetas de 7.
-mkdir -v $croothome_hst/$carpeta8
-chmod -v 777 $croothome_hst/$carpeta8
+cp -pvR $srcinst8 $croothome_hst
 
-touch $croothome_hst/reg_instal.log
-touch $croothome_hst/test.log
+cp -pv $srcdir/$var_220 $croothome_hst
+cp -pv $dirversiones/versiones-${vertoinstall}.sh $croothome_hst
+cp -pv $srcinst2/2-4-creacion-directorios.sh $croothome_hst
+cp -pv $srcinst2/2-5-creacion-config-files.sh $croothome_hst
+cp -pv $srcinst3/3-meta-inst-basic-system.sh $croothome_hst
+cp -pv $srcinst5/5-inst-runit.sh $croothome_hst
+
+touch $croothome_hst/$bitacora_chroot
+
+chown -vR $USER_Target:root $croothome_hst
 
 #====== STAGE 2 ========================================================
 #Para instalación automática
