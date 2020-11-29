@@ -22,6 +22,7 @@ cd /home
 ./2-4-creacion-directorios.sh
 ./2-5-creacion-config-files.sh
 
+cd $srcinst3
 
 ########## LINUX, MUSL, BINUTILS GCC ET AL. ############################
 # ----Testsuite Tools built in /tools ----------------------------------
@@ -74,14 +75,14 @@ export VER_binutils="2.31.1.dev010119"
 ########## GRAFT y Qi ##################################################
 # Programs for package management: Graft and Qi
 #Se instalan en /tools ¿Tiene sentido? Ahora no
-#./ibasicsyssw8_lzip.sh 		$VER_lzip 	gz
-#./ibasicsyssw9_unzip.sh 	$VER_unzip 	gz
+./ibasicsyssw8_lzip.sh 		$VER_lzip 	gz
+./ibasicsyssw9_unzip.sh 	$VER_unzip 	gz
 ##Añadidos en abril 2014 para la versión 1.0 de Qi
-#./ibasicsyssw138_lzlib.sh $VER_lzlib gz
-#./ibasicsyssw139_tarlz.sh	$VER_tarlz
-#
-#./ibasicsyssw10_graft.sh 	$VER_graft 	gz
-#./ibasicsyssw11_qi.sh 		$VER_qi
+./ibasicsyssw138_lzlib.sh $VER_lzlib gz
+./ibasicsyssw139_tarlz.sh	$VER_tarlz
+
+./ibasicsyssw10_graft.sh 	$VER_graft 	gz
+./ibasicsyssw11_qi.sh 		$VER_qi
 
 ########## SISTEMA #####################################################
 ./ibasicsyssw53_bzip2.sh 			$VER_bzip2 		gz
@@ -148,11 +149,8 @@ export VER_binutils="2.31.1.dev010119"
 ./ibasicsyssw128_gpm.sh $VER_gpm bz2
 
 
-########## 4 CONFIG FILES ##############################################
-./4-inst-config-files.sh
-
 ########## 5 RUNIT #####################################################
-./5-inst-runit.sh
+$croothome_tgt/5-inst-runit.sh
 # Este es para instalar primero qi.
 #./5-inst-runit-pkg.sh
 
