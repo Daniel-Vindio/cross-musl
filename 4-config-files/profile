@@ -3,9 +3,6 @@
 #export LANG=es_ES.iso-8859-15@euro
 export LANG=es_ES.ISO-8859-15@euro
 
-alias ls='ls --color'
-alias grep='grep --color'
-
 #------------------------------------------------------------------------------
 #Esto colorea el promt. Rojo para el root, verde para el resto de los usuarios.
 
@@ -14,9 +11,9 @@ GREEN="\[\e[1;32m\]"
 RED="\[\e[1;31m\]"
 
 if [[ $EUID == 0 ]]; then
-  PS1="$RED\u [ $NORMAL\W$RED ]# $NORMAL"
+  PS1="$RED\u [ $NORMAL\w$RED ]# $NORMAL"
 else
-  PS1="$GREEN\u [ $NORMAL\W$GREEN ]$ $NORMAL"
+  PS1="$GREEN\u [ $NORMAL\w$GREEN ]$ $NORMAL"
 fi
 
 unset NORMAL GREEN RED
