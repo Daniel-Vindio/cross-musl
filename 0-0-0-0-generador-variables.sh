@@ -269,6 +269,10 @@ set +h
 var_220=$var_220
 export var_220
 
+particion=$particion
+CLFS_ARCH_m=$CLFS_ARCH_m
+export particion CLFS_ARCH_m
+
 vertoinstall=$vertoinstall
 export vertoinstall
 
