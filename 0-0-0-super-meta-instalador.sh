@@ -63,6 +63,7 @@ mkdir -v $croothome_hst
 cp -pvR $srcinst3 $croothome_hst
 cp -pvR $srcinst4 $croothome_hst
 cp -pvR $srcinst5 $croothome_hst
+chmod -vR +x $croothome_hst/$carpeta5
 cp -pvR $srcinst6 $croothome_hst
 cp -pvR $srcinst7 $croothome_hst
 cp -pvR $srcinst8 $croothome_hst
