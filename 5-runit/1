@@ -139,12 +139,25 @@ ln -sfnv /run/shm /dev/shm
 #read -p "pulsa para seguir"
 
 #-----------S05 CARGA DE MODULES (S05 EN LFS)---------------------------
-#BLFS no tiene definida ninguna module en /etc/sysconfig/modules
-# Tampoco tengo previsto usar este metodo para cargar las que nuevas
-#(por ejemplo atk para tarjetas wifi.
-#Cuando se de el caso usare un service.
 
+if [ -s /etc/sysconfig/modules ]
+then
+	lista=$(grep -ie "^[^#]" /etc/sysconfig/modules)
+else
+	lista=""
+fi
 
+if [ -z "$lista" ]
+then
+	echo "No modules to load"
+else
+	for i in $lista
+	do
+		modprobe $i
+	done
+fi
+
+#read -p "pulsa para seguir"
 
 #------------ACTIVACIoN LOOPBACK (S08 EN LFS)---------------------------
 #Se saca a un servicio RUNIT (localnet)
