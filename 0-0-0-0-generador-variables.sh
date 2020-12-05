@@ -11,6 +11,7 @@ me=$0
 USER_Build_machine="daniel"
 USER_Target="daniel"
 IP_Target="192.168.0.254"
+GATEWAY_Target="192.168.0.1"
 
 
 # Variables para particiones y puntos de montaje
@@ -275,6 +276,10 @@ export particion CLFS_ARCH_m
 
 vertoinstall=$vertoinstall
 export vertoinstall
+
+IP_Target=$IP_Target
+GATEWAY_Target=$GATEWAY_Target
+export IP_Target GATEWAY_Target
 
 croothome_tgt=$croothome_tgt
 srcinst2="$croothome_tgt/$carpeta2"

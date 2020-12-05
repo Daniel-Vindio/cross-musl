@@ -20,6 +20,10 @@ export particion CLFS_ARCH_m
 vertoinstall=0
 export vertoinstall
 
+IP_Target=192.168.0.254
+GATEWAY_Target=192.168.0.1
+export IP_Target GATEWAY_Target
+
 croothome_tgt=/home
 srcinst2="/home/2-inst-chroot"
 srcinst3="/home/3-inst-clfs-system"
