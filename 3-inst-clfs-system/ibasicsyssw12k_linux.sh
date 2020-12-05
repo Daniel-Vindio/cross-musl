@@ -91,6 +91,7 @@ registro_error "make"
 
 make modules_install
 registro_error "modules_install"
+
 make headers_install
 registro_error "headers_install"
 
@@ -102,8 +103,8 @@ cp -iv .config /boot/config
 
 ######------------------------------------------------------------------
 
-#cd ..
-#rm -rf $nombre_dir && echo "Borrado el directorio $nombre_dir"
+cd ..
+rm -rf $nombre_dir && echo "Borrado el directorio $nombre_dir"
 
 
 #Registro de tiempos de ejecución
