@@ -34,7 +34,7 @@ devpts /dev/pts devpts gid=5,mode=620 0 0
 tmpfs /run tmpfs defaults 0 0
 devtmpfs /dev devtmpfs mode=0755,nosuid 0 0
 EOF
-echo /etc/fstab
+cat /etc/fstab
 
 cat > /etc/passwd << "EOF"
 root:x:0:0:root:/root:/bin/bash
@@ -169,8 +169,8 @@ rtc
 EOF
 echo /etc/sysconfig/udev_retry
 
-mkdir -pv /tools/etc
-cat > /tools/etc/qirc << "EOF"
+mkdir -pv /usr/etc
+cat > /usr/etc/qirc << EOF
 #
 # qirc: Runtime configuration file for Qi.
 #
@@ -193,7 +193,7 @@ cat > /tools/etc/qirc << "EOF"
 #packagedir=/usr/pkgs
 
 # Target directory where the links will be made
-#targetdir=/
+targetdir=/
 
 # List of package names to be installed rather than being updated.
 #
@@ -226,13 +226,13 @@ cat > /tools/etc/qirc << "EOF"
 #jobs=1
 
 # Output directory where the packages are written
-#outdir=/var/cache/qi/packages
+outdir=$croothome_tgt/$carpeta8
 
 # Working tree where archives, patches, and recipes are expected
 #worktree=/usr/src/qi
 
 # Where to find the sources (tarballs)
-#tardir=/usr/src/qi/sources
+tardir=${fuentes_target}
 
 # General network downloader
 #netget=wget -c -w1 -t3 --no-check-certificate
@@ -248,7 +248,7 @@ infodir=/tools/share/info
 mandir=/tools/share/man
 docdir=/tools/share/doc
 EOF
-echo /tools/etc/qirc
+echo /usr/etc/qirc
 
 cat > /etc/syslog.conf << "EOF"
 # Begin /etc/syslog.conf
@@ -285,7 +285,7 @@ echo /etc/issue
 
 cat > /etc/profile << "EOF"
 
-PATH=$PATH:/tools/bin:/tools/sbin
+PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin
 export PATH
 
 export LANG=es_ES.ISO-8859-15@euro
