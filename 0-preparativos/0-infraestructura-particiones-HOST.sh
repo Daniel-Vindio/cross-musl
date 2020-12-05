@@ -2,6 +2,15 @@
 
 # Creación de los directorios necesarios para la construcción del sistema
 
+if [ $(id -u) -ne 0 ]
+	then 
+		echo -e "Ur not root bro"
+		echo -e "Tines que ser root, tío"
+	exit 1
+fi
+
+. ../0-var-general-rc
+
 if [ -z "${CLFS}" ]; then
 	echo "CLFS no está definida!"
 	exit 1
