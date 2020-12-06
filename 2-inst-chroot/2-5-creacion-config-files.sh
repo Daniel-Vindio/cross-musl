@@ -92,7 +92,23 @@ EOF
 cat /tools/etc/ld-musl-${CLFS_ARCH_m}.path
 
 cat > /etc/sysconfig/modules << "EOF"
-
+#efivarfs
+iptable_nat
+ipt_MASQUERADE
+nf_log_arp
+nf_log_common
+nf_log_ipv4
+nf_log_ipv6
+nf_nat
+nf_nat_ftp
+nf_nat_ipv4
+nf_nat_irc
+nf_nat_sip
+#x86_pkg_temp_thermal
+xt_addrtype
+xt_LOG
+xt_mark
+xt_nat
 EOF
 cat /etc/sysconfig/modules
 
