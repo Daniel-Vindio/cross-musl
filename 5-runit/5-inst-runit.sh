@@ -65,7 +65,9 @@ registro_error "${srcinst5}/ctrlaltdel"
 mkdir -pv /etc/sv/
 mkdir -pv /service/
 
-servicios="getty-1 getty-3 klogd localnet randomseed ratonpad syslogd"
+servicios="getty-1 getty-3 klogd localnet randomseed ratonpad syslogd \
+network.eth0"
+
 for i in $servicios; do
 	cp -pvR ${srcinst5}/sv/$i /etc/sv/$i
 	registro_error "copia $i"
