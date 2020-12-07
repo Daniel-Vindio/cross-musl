@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
-echo "Empieza el servicio localnet"
+echo "Starting localnet service"
 
-echo "Activacion del interfaz 'loopback'"
+echo "Activating 'loopback' interface"
 ip addr add 127.0.0.1/8 label lo dev lo
 ip link set lo up
 
