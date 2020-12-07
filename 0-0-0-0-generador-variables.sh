@@ -12,6 +12,7 @@ USER_Build_machine="daniel"
 USER_Target="daniel"
 IP_Target="192.168.0.254"
 GATEWAY_Target="192.168.0.1"
+IFACE_Target="enp0s25"
 
 
 # Variables para particiones y puntos de montaje
@@ -279,7 +280,8 @@ export vertoinstall
 
 IP_Target=$IP_Target
 GATEWAY_Target=$GATEWAY_Target
-export IP_Target GATEWAY_Target
+IFACE_Target=$IFACE_Target
+export IP_Target GATEWAY_Target IFACE_Target
 
 croothome_tgt=$croothome_tgt
 srcinst2="$croothome_tgt/$carpeta2"
