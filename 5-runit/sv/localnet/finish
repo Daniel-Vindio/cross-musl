@@ -1,0 +1,6 @@
+#!/bin/bash -e
+
+echo -e "---- ./finish stopping localnet"
+exec 2>&1
+exec /etc/sv/localnet/localnet_fin.sh
+
