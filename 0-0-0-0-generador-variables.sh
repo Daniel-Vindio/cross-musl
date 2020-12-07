@@ -14,6 +14,7 @@ IP_Target="192.168.0.254"
 GATEWAY_Target="192.168.0.1"
 IFACE_Target="enp0s25"
 
+hostname_TGT="Pre-Bisonte"
 
 # Variables para particiones y puntos de montaje
 #===============================================
@@ -282,6 +283,9 @@ IP_Target=$IP_Target
 GATEWAY_Target=$GATEWAY_Target
 IFACE_Target=$IFACE_Target
 export IP_Target GATEWAY_Target IFACE_Target
+
+hostname_TGT=$hostname_TGT
+export hostname_TGT
 
 croothome_tgt=$croothome_tgt
 srcinst2="$croothome_tgt/$carpeta2"
