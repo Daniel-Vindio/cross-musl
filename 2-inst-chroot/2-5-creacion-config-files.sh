@@ -74,7 +74,7 @@ cat /etc/group
 #control_flujo
 
 cat > /etc/hostname << "EOF"
-Bisonte_x86_64
+$hostname_TGT
 EOF
 echo /etc/hostname
 
@@ -360,13 +360,13 @@ FONT="lat0-16 -m 8859-15"
 EOF
 echo /etc/sysconfig/console
 
-cat > /etc/sysconfig/ifconfig.eth0 << EOF
+cat > /etc/sysconfig/ifconfig.ether<< EOF
 ONBOOT=yes
-IFACE=eth0
+IFACE=$IFACE_Target
 SERVICE=ipv4-static
 IP=$IP_Target
 GATEWAY=$GATEWAY_Target
 PREFIX=24
 BROADCAST=192.168.1.255
 EOF
-echo /etc/sysconfig/ifconfig.eth0
+echo /etc/sysconfig/ifconfig.ether
