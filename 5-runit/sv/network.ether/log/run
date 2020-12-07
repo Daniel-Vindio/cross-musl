@@ -1,0 +1,5 @@
+#!/bin/bash
+exec 2>&1
+mkdir -p /tmp/network.ether
+/usr/local/bin/svlogd -tt /tmp/network.ether
+
