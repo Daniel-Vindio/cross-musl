@@ -162,19 +162,12 @@ fi
 #------------ACTIVACIoN LOOPBACK (S08 EN LFS)---------------------------
 #Se saca a un servicio RUNIT (localnet)
 
-#[ -r /etc/sysconfig/network ] && . /etc/sysconfig/network
-#[ -r /etc/hostname ] && HOSTNAME=`cat /etc/hostname`
-#
-#mensj="Activacion del interfaz «loopback»"
+[ -r /etc/hostname ] && HOSTNAME=`cat /etc/hostname`
+
+mensj="Asignacion del 'hostname': ${HOSTNAME}"
 ##mensj_pre
-#    ip addr add 127.0.0.1/8 label lo dev lo
-#    ip link set lo up
-#mensj_pos
-#
-#mensj="Asignacion del «hostname»: ${HOSTNAME}"
-##mensj_pre
-#    hostname ${HOSTNAME}
-#mensj_pos
+    hostname ${HOSTNAME}
+mensj_pos
 
 #-----------------------------------------------------------------------------------------------
 #read -p "pulsa para seguir"
