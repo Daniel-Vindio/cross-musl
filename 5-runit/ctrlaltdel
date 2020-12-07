@@ -1,10 +1,11 @@
 #!/bin/sh
 
-PATH=/bin:/usr/bin
-MSG="System is going down in 14 seconds..."
+PATH=/bin:/usr/bin:/tools/bin:/tools/sbin
+time=5
+MSG="Bisonte is rebooting in $time seconds (with forcefsck)."
 
-# echo 'disabled.' ; exit
+touch /etc/runit/rbootfsckf
 touch /etc/runit/stopit
+echo $MSG
 chmod 100 /etc/runit/stopit && echo "$MSG" | wall
-/bin/sleep 5
-#originalmente eran 14 segundos, pero par hacer pruebas, es mucho esperar. 
+sleep $time 
