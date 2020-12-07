@@ -73,7 +73,7 @@ EOF
 cat /etc/group
 #control_flujo
 
-cat > /etc/hostname << "EOF"
+cat > /etc/hostname << EOF
 $hostname_TGT
 EOF
 echo /etc/hostname
