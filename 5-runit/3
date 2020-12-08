@@ -1,46 +1,76 @@
-#!/bin/sh
+#!/bin/bash
 exec 2>&1
 
-PATH=/command:/sbin:/bin:/usr/sbin:/usr/bin
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/tools/bin:/tools/sbin:/command
+
+mensj_pos () {
+#Asi se puede usar en mensajes posteriores
+VAL_RETORNO=$?
+
+if [ $VAL_RETORNO -ne 0 ]
+then
+    echo -e "\e[1;31m[FALLO]\e[0m --> $mensj"
+else
+    echo -e "\e[1;32m[VALE]\e[0m ---> $mensj"
+fi
+}
+
+echo "--> Running /etc/runit/3"
 
 LAST=0
-test -x /etc/runit/reboot && LAST=6 && touch /fastboot
+test -f /etc/runit/rbootfsckf && touch /forcefsck && rm /etc/runit/rbootfsckf && LAST=6
+test -x /etc/runit/reboot && touch /fastboot && rm /etc/runit/reboot && LAST=6
 
-echo 'Waiting for services to stop...'
+mensj="Saving randomseed"
+dd if=/dev/urandom of=/var/tmp/random-seed count=1
+mensj_pos
+
+mensj="Stopping services"
 sv -w196 force-stop /service/*
+mensj_pos
+
+mensj="Exiting services"
 sv exit /service/*
+mensj_pos
 
-#echo 'Shutdown...'
-#/etc/init.d/rc $LAST
+mensj="Sending TERM signal to all processes"
+kill -15 -1
+mensj_pos
+sleep 3
 
-
-#---------------DESMONTAJE (S40 EN LFS)---------------------------------
+mensj="Sending KILL signal to all processes"
+kill -9 -1
+mensj_pos
+sleep 3 
 
 # Don't unmount virtual file systems like /run
-echo "Unmounting all other currently mounted file systems..."
-umount -a -d -r -t notmpfs,nosysfs,nodevtmpfs,noproc,nodevpts #>/dev/null
+mensj="Unmounting all mounted filesystems"
+umount -a -d -r -t notmpfs,nosysfs,nodevtmpfs,noproc,nodevpts
+mensj_pos
 
 # Make sure / is mounted read only (umount bug)
-mount -o remount,ro /
+mensj="Remounting / as read only"
+mount -v -o remount,ro /
+mensj_pos
 
-#---------------DESACTIVACIoN DEL SWAP(S20 EN LFS)----------------------
-echo "Deactivating all swap files/partitions..."
-swapoff -a
+ls -l /etc/runit
+ls -l /f*
+sleep 20
 
-####Ver la posibilidad de hwclock --systohc --utc
+##---------------DESACTIVACIoN DEL SWAP(S20 EN LFS)----------------------
+#echo "Deactivating all swap files/partitions..."
+#swapoff -a
 
+case "$LAST" in
+  0)
+    echo "--> Halting system..."
+#    sleep 20
+    halt -d -f -i -p
+    ;;
 
-##Halt y Reboot son parte del paquete SysVinit, que no se ha instalado.
-#Todo este case no hace nada en un sistema Runit.
-#case "$LAST" in
-#  0)
-#    echo "Halting system..."
-#    halt -d -f -i -p
-#	;;
-#
-#  6)
-#	#touch /fastboot en este momento ya es read only
-#	echo "Restarting system..."
-#	reboot -d -f -i
-#	;;
-#esac
+  6)
+    echo "--> Restarting system..."
+#    sleep 20
+    reboot -d -f -i
+    ;;
+esac
